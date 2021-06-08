@@ -213,12 +213,26 @@ class ResturantBox extends StatelessWidget {
                         color: Color(0xFFe91e63),
                       ),
                       SizedBox(width: 5),
-                      Text(
-                        '${peykPrice.toInt()}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            '${peykPrice.toInt()}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            'تومن',
+                            style: TextStyle(
+                              color: Colors.black45,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

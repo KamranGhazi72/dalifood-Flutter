@@ -9,7 +9,7 @@ class _TopMenusState extends State<TopMenus> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 95,
       child: ListView(
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(),
@@ -47,7 +47,7 @@ class TopMenuTiles extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
+            padding: EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 0),
             // decoration: new BoxDecoration(boxShadow: [
             //   new BoxShadow(
             //     color: Color(0xFFfae3e2),
@@ -76,7 +76,7 @@ class TopMenuTiles extends StatelessWidget {
           ),
           Text(name,
               style: TextStyle(
-                  color: Color(0xFF6e6e71),
+                  color: Colors.black87,
                   fontSize: 14,
                   fontWeight: FontWeight.w400)),
         ],

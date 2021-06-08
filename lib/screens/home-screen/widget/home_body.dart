@@ -25,6 +25,7 @@ class HomeBody extends StatelessWidget {
               nameTopic: 'بهترین غذاها',
               catLinkName: '',
             ),
+            SizedBox(height: 10),
           ],
         ),
       ),

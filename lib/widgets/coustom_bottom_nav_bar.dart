@@ -1,4 +1,6 @@
 import 'package:dali_food/enums.dart';
+import 'package:dali_food/screens/home-screen/home_screen.dart';
+import 'package:dali_food/screens/search-screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
@@ -35,15 +37,21 @@ class CustomBottomNavBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                  icon: Icon(
-                    Icons.storefront,
-                    color: MenuState.home == selectedMenu
-                        ? Color(0xFFe91e63)
-                        : inActiveIconColor,
-                  ),
-                  onPressed: () {}
-                  // Navigator.pushNamed(context, HomeScreen.routeName),
-                  ),
+                icon: Icon(
+                  Icons.storefront,
+                  color: MenuState.home == selectedMenu
+                      ? Color(0xFFe91e63)
+                      : inActiveIconColor,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
+                },
+              ),
               IconButton(
                 icon: Icon(
                   Icons.manage_search_outlined,
@@ -51,7 +59,14 @@ class CustomBottomNavBar extends StatelessWidget {
                       ? Color(0xFFe91e63)
                       : inActiveIconColor,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchScreen(),
+                    ),
+                  );
+                },
               ),
               SizedBox(width: 33),
               IconButton(
@@ -61,9 +76,7 @@ class CustomBottomNavBar extends StatelessWidget {
                       ? Color(0xFFe91e63)
                       : inActiveIconColor,
                 ),
-                onPressed: () {
-                  // Navigator.pushNamed(context, CategoryScreen.routeName);
-                },
+                onPressed: () {},
               ),
               IconButton(
                   icon: Icon(
