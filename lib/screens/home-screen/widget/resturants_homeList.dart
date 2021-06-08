@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ResturantsHomeList extends StatefulWidget {
-  const ResturantsHomeList({Key? key}) : super(key: key);
+class ResturantsHomeList extends StatelessWidget {
+  String nameTopic;
+  String catLinkName;
 
-  @override
-  _ResturantsHomeListState createState() => _ResturantsHomeListState();
-}
+  ResturantsHomeList({
+    Key? key,
+    required this.nameTopic,
+    required this.catLinkName,
+  }) : super(key: key);
 
-class _ResturantsHomeListState extends State<ResturantsHomeList> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,19 +28,22 @@ class _ResturantsHomeListState extends State<ResturantsHomeList> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'بهترین رستوران ها',
+                    nameTopic,
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
-                  Text(
-                    'بازم هست',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.blueAccent,
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      'بازم هست',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.blueAccent,
+                      ),
                     ),
                   ),
                 ],
@@ -61,22 +66,39 @@ class _ResturantsHomeListState extends State<ResturantsHomeList> {
                   img: 'assets/images/food2.jpg',
                 ),
                 ResturantBox(
-                  id: 0,
-                  name: 'رستوان ریحون',
+                  id: 1,
+                  name: 'اکبر جوجه',
                   desc:
-                      'جوجه کباب بدون استخوان، فیله ماهی، میگو کبابی، کباب ترش، کباب چنجه ،کوبیده، قرمه سبزی، کباب برگ',
+                      'جوجه کباب ، فسنجون، کباب برگ، آش هالاو، دنده کباب، کباب سالمون، بال مرغ عسلی، کباب گوشت و سبزیجات',
                   address: 'خیابان آزادی - روبرو بانک ملت',
-                  peykPrice: 1500,
-                  img: 'assets/images/food2.jpg',
+                  peykPrice: 2000,
+                  img: 'assets/images/food4.jpg',
                 ),
                 ResturantBox(
-                  id: 0,
-                  name: 'رستوان ریحون',
+                  id: 3,
+                  name: 'فست فود جگوار',
+                  desc: 'چیزبرگر، پیتزا پپرونی، استیک',
+                  address: 'خیابان دوم پامنار - روبرو پارک جواهری',
+                  peykPrice: 4500,
+                  img: 'assets/images/food1.jpg',
+                ),
+                ResturantBox(
+                  id: 4,
+                  name: 'ایتالین',
                   desc:
-                      'جوجه کباب بدون استخوان، فیله ماهی، میگو کبابی، کباب ترش، کباب چنجه ،کوبیده، قرمه سبزی، کباب برگ',
-                  address: 'خیابان آزادی - روبرو بانک ملت',
-                  peykPrice: 1500,
-                  img: 'assets/images/food2.jpg',
+                      'اسپاگتی، روماندو، استیک گوشت، پیتزا مارگاریتا، اسنک‌های ونیزی، ریزیتو اسکامپی، بیستکا الا فیورنتینا، پارمیگینا ملانزین',
+                  address: 'ولنجک - میدان رخش - جنب پارک',
+                  peykPrice: 3500,
+                  img: 'assets/images/berger1.jpg',
+                ),
+                ResturantBox(
+                  id: 2,
+                  name: 'علی بابا',
+                  desc:
+                      'جوجه، برگ، شیشلیک، سلطانی، چلوکباب کوبیده، جوجه کباب بدون استخوان، فیله ماهی، میگو کبابی، کباب ترش، کباب چنجه',
+                  address: 'خیابان دوم پامنار - روبرو پارک جواهری',
+                  peykPrice: 5000,
+                  img: 'assets/images/berger3.png',
                 ),
               ],
             ),
