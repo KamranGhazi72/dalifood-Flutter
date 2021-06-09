@@ -1,5 +1,7 @@
 import 'package:dali_food/enums.dart';
 import 'package:dali_food/screens/home-screen/home_screen.dart';
+import 'package:dali_food/screens/orders-screen/order_screen.dart';
+import 'package:dali_food/screens/profile-screen/profile_screen.dart';
 import 'package:dali_food/screens/search-screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -76,7 +78,14 @@ class CustomBottomNavBar extends StatelessWidget {
                       ? Color(0xFFe91e63)
                       : inActiveIconColor,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderScreen(),
+                    ),
+                  );
+                },
               ),
               IconButton(
                   icon: Icon(
@@ -85,9 +94,14 @@ class CustomBottomNavBar extends StatelessWidget {
                         ? Color(0xFFe91e63)
                         : inActiveIconColor,
                   ),
-                  onPressed: () => {
-                        // Navigator.pushNamed(context, ProfileScreen.routeName),
-                      }),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfileScreen(),
+                      ),
+                    );
+                  }),
             ],
           )),
     );
