@@ -1,3 +1,4 @@
+import 'package:dali_food/screens/comment-screen/comment_screen.dart';
 import 'package:flutter/material.dart';
 
 class OlderOrder extends StatelessWidget {
@@ -262,7 +263,13 @@ class OlderOrder extends StatelessWidget {
                       ],
                     )
                   : ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CommentScreen()),
+                        );
+                      },
                       child:
                           Text('شما هنوز درباره این سفارش خود نظر نداده اید'),
                       style: ElevatedButton.styleFrom(
