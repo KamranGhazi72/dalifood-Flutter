@@ -1,3 +1,4 @@
+import 'package:dali_food/screens/cart-screen/cart_screen.dart';
 import 'package:flutter/material.dart';
 
 class FoodsHomeList extends StatelessWidget {
@@ -148,7 +149,14 @@ class FoodBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CartScreen(),
+          ),
+        );
+      },
       child: Container(
         height: MediaQuery.of(context).size.width * 0.8,
         width: MediaQuery.of(context).size.width * 0.51,
