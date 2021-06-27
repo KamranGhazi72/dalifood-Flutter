@@ -1,3 +1,4 @@
+import 'package:dali_food/screens/comment-screen/widget/rateBar.dart';
 import 'package:flutter/material.dart';
 
 class CommentBody extends StatelessWidget {
@@ -40,6 +41,8 @@ class CommentBody extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 35),
+            RateBar(),
             SizedBox(height: 35),
             Column(
               children: [

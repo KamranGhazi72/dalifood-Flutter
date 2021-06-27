@@ -1,5 +1,6 @@
 import 'package:dali_food/enums.dart';
 import 'package:dali_food/screens/home-screen/widget/home_body.dart';
+import 'package:dali_food/screens/mapResturants-screen/mapResturant_screen.dart';
 import 'package:dali_food/widgets/coustom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,14 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFFe91e63),
         child: Icon(Icons.map_outlined),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MapResturantScreen(),
+            ),
+          );
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
