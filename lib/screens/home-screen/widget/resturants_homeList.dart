@@ -1,3 +1,4 @@
+import 'package:dali_food/screens/resturantDesc-screen/resturantDesc_screen.dart';
 import 'package:flutter/material.dart';
 
 class ResturantsHomeList extends StatelessWidget {
@@ -130,7 +131,14 @@ class ResturantBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResturantDescScreen(),
+          ),
+        );
+      },
       child: Container(
         height: MediaQuery.of(context).size.width * 0.6,
         padding: EdgeInsets.all(5),
