@@ -63,7 +63,7 @@ class CategoryBody extends StatelessWidget {
                                 Text(
                                   categories[index].name,
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
