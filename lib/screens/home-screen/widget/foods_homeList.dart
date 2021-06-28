@@ -1,4 +1,5 @@
 import 'package:dali_food/screens/cart-screen/cart_screen.dart';
+import 'package:dali_food/screens/category-screen/category_screen.dart';
 import 'package:flutter/material.dart';
 
 class FoodsHomeList extends StatelessWidget {
@@ -37,7 +38,14 @@ class FoodsHomeList extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CategoryScreen(),
+                        ),
+                      );
+                    },
                     child: Text(
                       'بازم هست',
                       style: TextStyle(

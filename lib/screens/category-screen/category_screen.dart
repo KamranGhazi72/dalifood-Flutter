@@ -1,14 +1,14 @@
-import 'package:dali_food/screens/resturantDesc-screen/widget/rDesc_body.dart';
+import 'package:dali_food/screens/category-screen/widget/category_body.dart';
 import 'package:flutter/material.dart';
 
-class ResturantDescScreen extends StatefulWidget {
-  const ResturantDescScreen({Key? key}) : super(key: key);
+class CategoryScreen extends StatefulWidget {
+  const CategoryScreen({Key? key}) : super(key: key);
 
   @override
-  _ResturantDescScreenState createState() => _ResturantDescScreenState();
+  _CategoryScreenState createState() => _CategoryScreenState();
 }
 
-class _ResturantDescScreenState extends State<ResturantDescScreen> {
+class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class _ResturantDescScreenState extends State<ResturantDescScreen> {
         centerTitle: true,
         title: Column(
           children: [
-            Text('جزییات رستوران',
+            Text('دسته بندی',
                 style: TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.bold,
@@ -30,7 +30,7 @@ class _ResturantDescScreenState extends State<ResturantDescScreen> {
           ],
         ),
       ),
-      body: RDescBody(),
+      body: CategoryBody(),
     );
   }
 }

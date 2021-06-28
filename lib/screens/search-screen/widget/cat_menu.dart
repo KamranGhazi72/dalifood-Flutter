@@ -1,3 +1,4 @@
+import 'package:dali_food/screens/category-screen/category_screen.dart';
 import 'package:flutter/material.dart';
 
 class CatMenu extends StatelessWidget {
@@ -40,30 +41,40 @@ class CatMenuTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 120,
-      margin: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-      // padding: EdgeInsets.symmetric(
-      //   horizontal: 20,
-      //   vertical: 35,
-      // ),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(
-              'assets/images/' + imageUrl,
-            ),
-            fit: BoxFit.cover),
-        // color: Color(int.parse(i.img)),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Center(
-        child: Text.rich(
-          TextSpan(
-            text: name,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w900,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CategoryScreen(),
+          ),
+        );
+      },
+      child: Container(
+        width: 120,
+        margin: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+        // padding: EdgeInsets.symmetric(
+        //   horizontal: 20,
+        //   vertical: 35,
+        // ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(
+                'assets/images/' + imageUrl,
+              ),
+              fit: BoxFit.cover),
+          // color: Color(int.parse(i.img)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Center(
+          child: Text.rich(
+            TextSpan(
+              text: name,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w900,
+              ),
             ),
           ),
         ),
