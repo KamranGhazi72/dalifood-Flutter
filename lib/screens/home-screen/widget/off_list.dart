@@ -1,3 +1,4 @@
+import 'package:dali_food/screens/offerList-screen/offerList_Screen.dart';
 import 'package:flutter/material.dart';
 
 class OffList extends StatelessWidget {
@@ -15,7 +16,14 @@ class OffList extends StatelessWidget {
           'تخفیفان',
           style: TextStyle(fontSize: 18),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OfferListScreen(),
+            ),
+          );
+        },
       ),
     );
   }
