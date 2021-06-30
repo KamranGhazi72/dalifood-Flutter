@@ -1,5 +1,5 @@
-import 'package:dali_food/controllers/category_controller.dart';
-import 'package:dali_food/models/category.dart';
+import 'package:dali_food/controllers/cart_controller.dart';
+import 'package:dali_food/controllers/product_controller.dart';
 import 'package:dali_food/screens/resturantDesc-screen/resturantDesc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,15 +7,16 @@ import 'package:get/get.dart';
 class CategoryBody extends StatelessWidget {
   CategoryBody({Key? key}) : super(key: key);
 
-  final catController = Get.put(CatController());
+  final productsController = Get.put(ProductsController());
+  final cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: GetX<CatController>(builder: (controller) {
+      child: GetX<ProductsController>(builder: (productController) {
         return ListView.builder(
           physics: BouncingScrollPhysics(),
-          itemCount: controller.categories.length,
+          itemCount: productController.products.length,
           itemBuilder: (context, index) {
             return Container(
               height: MediaQuery.of(context).size.width * 0.55,
@@ -56,7 +57,8 @@ class CategoryBody extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    controller.categories[index].resturantName,
+                                    productController
+                                        .products[index].resturantName,
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -70,14 +72,16 @@ class CategoryBody extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        controller.categories[index].foodName,
+                                        productController
+                                            .products[index].foodName,
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black54,
                                         ),
                                       ),
-                                      controller.categories[index].offerPrice !=
+                                      productController
+                                                  .products[index].offerPrice !=
                                               null
                                           ? Column(
                                               mainAxisAlignment:
@@ -94,7 +98,7 @@ class CategoryBody extends StatelessWidget {
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      '${controller.categories[index].price.toInt()}',
+                                                      '${productController.products[index].price.toInt()}',
                                                       style: TextStyle(
                                                         fontSize: 12,
                                                         fontWeight:
@@ -123,7 +127,7 @@ class CategoryBody extends StatelessWidget {
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      '${controller.categories[index].offerPrice}',
+                                                      '${productController.products[index].offerPrice}',
                                                       style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
@@ -152,7 +156,7 @@ class CategoryBody extends StatelessWidget {
                                                   CrossAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  '${controller.categories[index].price.toInt()}',
+                                                  '${productController.products[index].price.toInt()}',
                                                   style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.bold,
@@ -175,7 +179,8 @@ class CategoryBody extends StatelessWidget {
                                     width:
                                         MediaQuery.of(context).size.width * 0.9,
                                     child: Text(
-                                      controller.categories[index].foodDesc,
+                                      productController
+                                          .products[index].foodDesc,
                                       maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
@@ -196,7 +201,7 @@ class CategoryBody extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(4),
                                 image: DecorationImage(
                                   image: AssetImage(
-                                      controller.categories[index].img),
+                                      productController.products[index].img),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -226,7 +231,7 @@ class CategoryBody extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${controller.categories[index].peykPrice.toInt()}',
+                                  '${productController.products[index].peykPrice.toInt()}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
@@ -248,24 +253,30 @@ class CategoryBody extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () {
-                                controller.increaseBuy();
+                                cartController.addToCart(
+                                    productController.products[index]);
                               },
                               icon: Icon(Icons.add_box_outlined),
                               iconSize: 37,
                               color: Color(0xFFe91e63),
                             ),
                             SizedBox(width: 10),
-                            Text(
-                              '${controller.counterBuy}',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
+                            Obx(
+                              () => Text(
+                                '${cartController.cartItem.length}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             SizedBox(width: 10),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  cartController.deleteFtomCart(
+                                      productController.products[index]);
+                                },
                                 icon: Icon(
                                     Icons.indeterminate_check_box_outlined),
                                 iconSize: 37,

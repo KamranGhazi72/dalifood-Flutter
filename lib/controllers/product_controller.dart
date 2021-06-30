@@ -1,28 +1,33 @@
-import 'package:dali_food/models/category.dart';
+import 'package:dali_food/models/product.dart';
 import 'package:get/state_manager.dart';
 
-class CatController extends GetxController {
-  var categories = <Category>[].obs;
+class ProductsController extends GetxController {
+  var products = <Product>[].obs;
+  // var counter = 0.obs;
+
+  // increament() {
+  //   counter++;
+  // }
 
   void onInit() {
     super.onInit();
-    fetchCategories();
+    fetchProducts();
   }
 
-  void fetchCategories() async {
-    await Future.delayed(Duration(seconds: 3));
-    var categoriesResult = [
-      Category(
+  void fetchProducts() async {
+    await Future.delayed(Duration(seconds: 1));
+    var productsResult = [
+      Product(
         id: 0,
         resturantName: 'ایتالین',
-        foodName: 'پیتزا مارگاریتا',
+        foodName: 'پیتزا ماراریتا',
         foodDesc: 'گوشت راسته، قارچ، پنیر فلفل، ژامبون گوشت، ذرت',
         price: 23000,
         offerPrice: 18000,
         peykPrice: 1500,
         img: 'assets/images/berger3.png',
       ),
-      Category(
+      Product(
         id: 1,
         resturantName: 'علی بابا',
         foodName: 'کباب ترش',
@@ -32,7 +37,7 @@ class CatController extends GetxController {
         peykPrice: 1500,
         img: 'assets/images/kabab2.jpg',
       ),
-      Category(
+      Product(
         id: 2,
         resturantName: 'ایتالین',
         foodName: 'پیتزا مارگاریتا',
@@ -41,7 +46,7 @@ class CatController extends GetxController {
         peykPrice: 1500,
         img: 'assets/images/pizza1.jpg',
       ),
-      Category(
+      Product(
         id: 3,
         resturantName: 'ایتالین',
         foodName: 'پیتزا مارگاریتا',
@@ -51,7 +56,7 @@ class CatController extends GetxController {
         peykPrice: 1500,
         img: 'assets/images/berger1.jpg',
       ),
-      Category(
+      Product(
         id: 4,
         resturantName: 'ایتالین',
         foodName: 'پیتزا مارگاریتا',
@@ -60,7 +65,7 @@ class CatController extends GetxController {
         peykPrice: 1500,
         img: 'assets/images/kabab3.jpg',
       ),
-      Category(
+      Product(
         id: 5,
         resturantName: 'ایتالین',
         foodName: 'پیتزا مارگاریتا',
@@ -72,14 +77,14 @@ class CatController extends GetxController {
       ),
     ];
 
-    categories.value = categoriesResult;
+    products.value = productsResult;
   }
 
-  var counterBuy = 0.obs;
-  void increaseBuy() {
-    counterBuy++;
-    print('increased !!!!!!!!!!!!!!!');
-    print(counterBuy);
-    update();
-  }
+  // var counterBuy = 0;
+  // increaseBuy() {
+  //   counterBuy++;
+  //   print('increased !!!!!!!!!!!!!!!');
+  //   print(counterBuy);
+  //   update();
+  // }
 }

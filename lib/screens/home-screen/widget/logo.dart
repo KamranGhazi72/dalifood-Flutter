@@ -1,7 +1,11 @@
+import 'package:dali_food/controllers/count_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Logo extends StatelessWidget {
-  const Logo({Key? key}) : super(key: key);
+  Logo({Key? key}) : super(key: key);
+
+  final countController = Get.put(CountController());
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +22,14 @@ class Logo extends StatelessWidget {
                 height: 80,
                 width: 80,
               ),
+              // Obx(
+              //   () => ElevatedButton(
+              //     onPressed: () {
+              //       countController.increament();
+              //     },
+              //     child: Text('کانتررررر'),
+              //   ),
+              // ),
               Text(
                 'Dali fooD',
                 style: TextStyle(

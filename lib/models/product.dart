@@ -1,4 +1,4 @@
-class Category {
+class Product {
   int id;
   String resturantName;
   String foodName;
@@ -8,7 +8,7 @@ class Category {
   double peykPrice;
   String img;
 
-  Category({
+  Product({
     required this.id,
     required this.resturantName,
     required this.foodName,
