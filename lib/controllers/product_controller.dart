@@ -25,7 +25,11 @@ class ProductsController extends GetxController {
         price: 23000,
         offerPrice: 18000,
         peykPrice: 1500,
-        img: 'assets/images/berger3.png',
+        img: [
+          'assets/images/berger3.png',
+          'assets/images/kabab3.jpg',
+          'assets/images/pizza1.jpg'
+        ],
       ),
       Product(
         id: 1,
@@ -35,7 +39,7 @@ class ProductsController extends GetxController {
         price: 23000,
         offerPrice: 18000,
         peykPrice: 1500,
-        img: 'assets/images/kabab2.jpg',
+        img: ['assets/images/kabab2.jpg'],
       ),
       Product(
         id: 2,
@@ -44,7 +48,7 @@ class ProductsController extends GetxController {
         foodDesc: 'گوشت راسته، قارچ، پنیر فلفل، ژامبون گوشت، ذرت',
         price: 23000,
         peykPrice: 1500,
-        img: 'assets/images/pizza1.jpg',
+        img: ['assets/images/pizza1.jpg'],
       ),
       Product(
         id: 3,
@@ -54,7 +58,7 @@ class ProductsController extends GetxController {
         price: 23000,
         offerPrice: 18000,
         peykPrice: 1500,
-        img: 'assets/images/berger1.jpg',
+        img: ['assets/images/berger1.jpg'],
       ),
       Product(
         id: 4,
@@ -63,7 +67,7 @@ class ProductsController extends GetxController {
         foodDesc: 'گوشت راسته، قارچ، پنیر فلفل، ژامبون گوشت، ذرت',
         price: 23000,
         peykPrice: 1500,
-        img: 'assets/images/kabab3.jpg',
+        img: ['assets/images/kabab3.jpg'],
       ),
       Product(
         id: 5,
@@ -73,7 +77,7 @@ class ProductsController extends GetxController {
         price: 23000,
         offerPrice: 18000,
         peykPrice: 1500,
-        img: 'assets/images/kabab1.jpg',
+        img: ['assets/images/kabab1.jpg'],
       ),
     ];
 

@@ -6,7 +6,7 @@ class Product {
   double price;
   double? offerPrice;
   double peykPrice;
-  String img;
+  List<String> img;
 
   Product({
     required this.id,

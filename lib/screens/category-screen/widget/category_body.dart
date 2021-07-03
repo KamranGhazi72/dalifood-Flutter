@@ -1,6 +1,6 @@
 import 'package:dali_food/controllers/cart_controller.dart';
 import 'package:dali_food/controllers/product_controller.dart';
-import 'package:dali_food/screens/resturantDesc-screen/resturantDesc_screen.dart';
+import 'package:dali_food/screens/foodDesc-screen/foodDesc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +38,20 @@ class CategoryBody extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ResturantDescScreen(),
+                            builder: (context) => FoodDescScreen(
+                              proId: productController.products[index].id,
+                              proResturantName: productsController
+                                  .products[index].resturantName,
+                              proFoodName:
+                                  productsController.products[index].foodName,
+                              proPrice:
+                                  productsController.products[index].price,
+                              proOfferPrice:
+                                  productsController.products[index].offerPrice,
+                              proPeykPrice:
+                                  productsController.products[index].peykPrice,
+                              proImg: productsController.products[index].img,
+                            ),
                           ),
                         );
                       },
@@ -201,7 +214,7 @@ class CategoryBody extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(4),
                                 image: DecorationImage(
                                   image: AssetImage(
-                                      productController.products[index].img),
+                                      productController.products[index].img[0]),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -249,40 +262,40 @@ class CategoryBody extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                cartController.addToCart(
-                                    productController.products[index]);
-                              },
-                              icon: Icon(Icons.add_box_outlined),
-                              iconSize: 37,
-                              color: Color(0xFFe91e63),
-                            ),
-                            SizedBox(width: 10),
-                            Obx(
-                              () => Text(
-                                '${cartController.cartItem.length}',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            IconButton(
-                                onPressed: () {
-                                  cartController.deleteFtomCart(
-                                      productController.products[index]);
-                                },
-                                icon: Icon(
-                                    Icons.indeterminate_check_box_outlined),
-                                iconSize: 37,
-                                color: Colors.black54),
-                          ],
-                        ),
+                        // Row(
+                        //   children: [
+                        //     IconButton(
+                        //       onPressed: () {
+                        //         cartController.addToCart(
+                        //             productController.products[index]);
+                        //       },
+                        //       icon: Icon(Icons.add_box_outlined),
+                        //       iconSize: 37,
+                        //       color: Color(0xFFe91e63),
+                        //     ),
+                        //     SizedBox(width: 10),
+                        //     Obx(
+                        //       () => Text(
+                        //         '${cartController.cartItem.length}',
+                        //         style: TextStyle(
+                        //           color: Colors.black,
+                        //           fontSize: 17,
+                        //           fontWeight: FontWeight.bold,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     SizedBox(width: 10),
+                        //     IconButton(
+                        //         onPressed: () {
+                        //           cartController.deleteFtomCart(
+                        //               productController.products[index]);
+                        //         },
+                        //         icon: Icon(
+                        //             Icons.indeterminate_check_box_outlined),
+                        //         iconSize: 37,
+                        //         color: Colors.black54),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),
