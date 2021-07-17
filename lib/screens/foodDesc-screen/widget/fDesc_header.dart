@@ -13,7 +13,6 @@ class FDescHeader extends StatelessWidget {
   // final productsController = Get.put(ProductsController());
   @override
   Widget build(BuildContext context) {
-    int selectedImage = 0;
     return Container(
       child: CarouselSlider(
         options: CarouselOptions(

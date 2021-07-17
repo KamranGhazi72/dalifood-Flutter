@@ -40,9 +40,19 @@ class _FoodDescBodyState extends State<FoodDescBody> {
       child: Column(
         children: [
           FDescHeader(img: widget.productImg),
-          FDescName(resturantName: widget.productResturantName),
+          FDescName(
+            resturantName: widget.productResturantName,
+            foodName: widget.productFoodName,
+            price: widget.productPrice,
+            offerPrice: widget.productOfferPrice,
+            peykPrice: widget.productPeykPrice,
+          ),
           Container(
+            padding: EdgeInsets.only(left: 20),
+            width: MediaQuery.of(context).size.width,
+            color: Colors.white,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
                   onPressed: () {
