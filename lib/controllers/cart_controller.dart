@@ -9,14 +9,20 @@ class CartController extends GetxController {
 
   addToCart(Product product, Drink drink, int counterBuy) {
     cartItem.add(product);
-    drinkItem.add(drink);
+    if (drink != null) {
+      drinkItem.add(drink);
+    }
     orderCounter = counterBuy;
     print('cartItem.length:::  ${cartItem.length}');
     print('drinkItem.length:::  ${drinkItem.length}');
     print('Order Counter:::  $orderCounter');
   }
 
-  deleteFtomCart(Product product) {
+  deleteFoodFtomCart(Product product) {
     cartItem.remove(product);
+  }
+
+  deleteDrinkFtomCart(Drink drink) {
+    drinkItem.remove(drink);
   }
 }

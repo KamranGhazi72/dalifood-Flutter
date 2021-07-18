@@ -1,16 +1,20 @@
-import 'package:dali_food/models/Cart.dart';
 import 'package:flutter/material.dart';
 
+import 'package:dali_food/models/product.dart';
+
 class CartCard extends StatelessWidget {
-  const CartCard({
+  final Product cart;
+  int numOfItem;
+
+  CartCard({
     Key? key,
     required this.cart,
+    required this.numOfItem,
   }) : super(key: key);
-
-  final Cart cart;
 
   @override
   Widget build(BuildContext context) {
+    print('Cart Page:  $cart');
     return Row(
       children: [
         SizedBox(
@@ -23,7 +27,7 @@ class CartCard extends StatelessWidget {
                 color: Color(0xFFF5F6F9),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(cart.img),
+              child: Image.asset(cart.img[0]),
             ),
           ),
         ),
@@ -32,7 +36,7 @@ class CartCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              cart.title,
+              cart.foodName,
               style: TextStyle(color: Colors.black, fontSize: 16),
               maxLines: 2,
             ),
@@ -42,7 +46,7 @@ class CartCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  " x${cart.numOfItem}",
+                  "$numOfItem",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
@@ -54,7 +58,7 @@ class CartCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      '${cart.price}',
+                      '${cart.price.toInt()}',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
