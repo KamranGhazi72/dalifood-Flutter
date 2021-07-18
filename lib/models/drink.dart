@@ -16,31 +16,31 @@ class Drink {
 
 List<Drink> demoDrink = [
   Drink(
-      id: 0,
+      id: 1,
       drinkName: 'کوکاکولا',
       price: 13000,
       offerPrice: 9000,
       img: 'assets/images/cocaCola.jpg'),
   Drink(
-      id: 0,
+      id: 2,
       drinkName: 'فانتا',
       price: 13000,
       offerPrice: 9000,
       img: 'assets/images/fanta.jpg'),
   Drink(
-      id: 0,
+      id: 3,
       drinkName: 'نوشابه کوچک',
       price: 13000,
       offerPrice: 9000,
       img: 'assets/images/littleCoca.jpg'),
   Drink(
-      id: 0,
+      id: 4,
       drinkName: 'نوشابه قوطی',
       price: 13000,
       offerPrice: 9000,
       img: 'assets/images/littleSoft.jpg'),
   Drink(
-      id: 0,
+      id: 5,
       drinkName: 'دوغ',
       price: 13000,
       offerPrice: 9000,

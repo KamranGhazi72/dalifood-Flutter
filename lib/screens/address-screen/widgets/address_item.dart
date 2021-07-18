@@ -1,4 +1,6 @@
+import 'package:dali_food/screens/cart-screen/cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
 class AddressItem extends StatelessWidget {
   String adress;
@@ -9,8 +11,22 @@ class AddressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocalStorage storage = new LocalStorage('todo_app');
+
+    _saveToStorage() {
+      storage.setItem('AddressChoised', adress);
+    }
+
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        _saveToStorage();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CartScreen(),
+          ),
+        );
+      },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),

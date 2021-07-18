@@ -39,18 +39,22 @@ class CategoryBody extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => FoodDescScreen(
-                              proId: productController.products[index].id,
-                              proResturantName: productsController
+                              product: productsController.products[index],
+                              productId: productController.products[index].id,
+                              productResturantName: productsController
                                   .products[index].resturantName,
-                              proFoodName:
+                              productFoodName:
                                   productsController.products[index].foodName,
-                              proPrice:
+                              productDesc:
+                                  productsController.products[index].foodDesc,
+                              productPrice:
                                   productsController.products[index].price,
-                              proOfferPrice:
+                              productOfferPrice:
                                   productsController.products[index].offerPrice,
-                              proPeykPrice:
+                              productPeykPrice:
                                   productsController.products[index].peykPrice,
-                              proImg: productsController.products[index].img,
+                              productImg:
+                                  productsController.products[index].img,
                             ),
                           ),
                         );

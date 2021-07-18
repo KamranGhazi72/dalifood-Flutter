@@ -23,34 +23,34 @@ class Logo extends StatelessWidget {
                 height: 80,
                 width: 80,
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 3,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    side: BorderSide(width: 2, color: Color(0xFF2196F3)),
-                    elevation: 2,
-                    backgroundColor: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddressScreen(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'آدرس ...',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   width: MediaQuery.of(context).size.width / 3,
+              //   child: OutlinedButton(
+              //     style: OutlinedButton.styleFrom(
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(18.0),
+              //       ),
+              //       side: BorderSide(width: 2, color: Color(0xFF2196F3)),
+              //       elevation: 2,
+              //       backgroundColor: Colors.white,
+              //     ),
+              //     onPressed: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => AddressScreen(),
+              //         ),
+              //       );
+              //     },
+              //     child: Text(
+              //       'آدرس ...',
+              //       style: TextStyle(
+              //         color: Colors.black54,
+              //         fontWeight: FontWeight.w600,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Text(
                 'Dali fooD',
                 style: TextStyle(

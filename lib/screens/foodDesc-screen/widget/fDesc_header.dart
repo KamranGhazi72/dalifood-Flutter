@@ -46,25 +46,23 @@ class FDescHeader extends StatelessWidget {
                   // color: Color(int.parse(i.img)),
                   borderRadius: BorderRadius.circular(0),
                 ),
-                // child: Text('Image:  $i'),
-                // child: Text.rich(
-                //   TextSpan(
-                //     // style: TextStyle(color: Color(int.parse(i.color))),
-                //     children: [
-                //       TextSpan(
-                //         text: i.title + "\n",
-                //         style: TextStyle(
-                //           fontSize: 16,
-                //         ),
-                //       ),
-                //       TextSpan(
-                //         text: i.detail,
-                //         style: TextStyle(
-                //             fontSize: 24, fontFamily: "LalezarRegular"),
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_outlined,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           );
