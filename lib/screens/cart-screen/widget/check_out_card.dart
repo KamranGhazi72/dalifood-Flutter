@@ -1,10 +1,13 @@
+import 'package:dali_food/controllers/cart_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CheckoutCard extends StatelessWidget {
-  const CheckoutCard({
+  CheckoutCard({
     Key? key,
   }) : super(key: key);
 
+  final CartController cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,43 +36,66 @@ class CheckoutCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF5F6F9),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(
-                    Icons.confirmation_number_outlined,
-                    color: Color(0xFFFF7642),
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      "با اکتساب 9% ارزش افزوده",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          color: Colors.black54),
+                    ),
+                  ],
                 ),
-                Spacer(),
-                Text("افزودن کد تخفیف"),
-                const SizedBox(width: 10),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 12,
-                  color: Colors.black87,
-                )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(6),
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF5F6F9),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(
+                        Icons.confirmation_number_outlined,
+                        color: Color(0xFFFF7642),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "افزودن کد تخفیف",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(width: 20),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 12,
+                      color: Colors.black87,
+                    )
+                  ],
+                ),
               ],
             ),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text.rich(
-                  TextSpan(
-                    text: "جمع:\n",
-                    children: [
-                      TextSpan(
-                        text: "337.15 تومان",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                      ),
-                    ],
+                Obx(
+                  () => Text.rich(
+                    TextSpan(
+                      text: "جمع:\n",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      children: [
+                        TextSpan(
+                          text: "${cartController.totalPrice.toInt()} تومن",
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -77,10 +103,13 @@ class CheckoutCard extends StatelessWidget {
                   child: SizedBox(
                     width: double.infinity,
                     height: 49,
-                    child: FlatButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      color: Color(0xFFFF7642),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        primary: Color(0xFFFF7642),
+                      ),
                       onPressed: () {},
                       child: Text(
                         'پرداخت',

@@ -90,73 +90,89 @@ class _BodyState extends State<Body> {
                       ],
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 88,
-                        child: AspectRatio(
-                          aspectRatio: 0.88,
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF5F6F9),
-                              borderRadius: BorderRadius.circular(15),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 88,
+                          child: AspectRatio(
+                            aspectRatio: 0.88,
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFF5F6F9),
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(
+                                  width: 1,
+                                  color: Color(0xFFFFEFFF),
+                                ),
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      cartController.drinkItem[index].img),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
-                            child: Image.asset(
-                                cartController.drinkItem[index].img),
                           ),
                         ),
-                      ),
-                      SizedBox(width: 20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            cartController.drinkItem[index].drinkName,
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                            maxLines: 2,
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              // Text(
-                              //   "$numOfItem",
-                              //   style: TextStyle(
-                              //     fontWeight: FontWeight.w600,
-                              //     color: Colors.black,
-                              //   ),
-                              // ),
-                              SizedBox(width: 50),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '${cartController.drinkItem[index].price.toInt()}',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFFFF7642),
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'تومن',
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
+                        SizedBox(width: 20),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              cartController.drinkItem[index].drinkName,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
                               ),
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
+                              maxLines: 2,
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                // Text(
+                                //   "$numOfItem",
+                                //   style: TextStyle(
+                                //     fontWeight: FontWeight.w600,
+                                //     color: Colors.black,
+                                //   ),
+                                // ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '${cartController.drinkItem[index].price.toInt()}',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFFFF7642),
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      'تومن',
+                                      style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
