@@ -30,7 +30,7 @@ class MapRes extends StatelessWidget {
                 height: 20.0,
                 point: LatLng(35.72685718281043, 51.32285808890024),
                 builder: (ctx) => Container(
-                  child: FlutterLogo(),
+                  child: Icon(Icons.location_on_outlined),
                 ),
               ),
             ],
