@@ -21,17 +21,22 @@ class FormContainer extends StatelessWidget {
             child: new Column(
               children: <Widget>[
                 new InputFieldArea(
-                    hint: "شماره موبایل",
-                    obscure: false,
-                    icon: Icons.phone_iphone_outlined,
-                    validator: (String? value) {
-                      if (!isNumeric(value!) &&
-                          value.length < 11 &&
-                          value.length > 11) {
-                        return 'شماره وارد شده معتبر نیست';
-                      }
-                    },
-                    onSaved: phoneOnSaved),
+                  hint: "شماره موبایل",
+                  obscure: false,
+                  icon: Icons.phone_iphone_outlined,
+                  validator: (String? value) {
+                    if (value!.isEmpty) {
+                      return 'لطفا شماره خود را وارد بفرمایید';
+                    } else if (!isNumeric(value)) {
+                      return 'شماره وارد شده معتبر نیست';
+                    } else if (value.length < 11) {
+                      return 'شماره وارد شده باید 11 کاراکتر  باشد';
+                    } else if (value.length > 11) {
+                      return 'شماره وارد شده باید 11 کاراکتر  باشد';
+                    }
+                  },
+                  onSaved: phoneOnSaved,
+                ),
                 // new InputFieldArea(
                 //     hint: "پسورد",
                 //     obscure: true,

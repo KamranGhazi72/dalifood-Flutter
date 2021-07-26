@@ -1,4 +1,5 @@
 import 'package:dali_food/screens/sign_in/components/Form.dart';
+import 'package:dali_food/screens/verificationCode-screen/verificationCode_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignInBody extends StatefulWidget {
@@ -77,9 +78,16 @@ class _SignInBodyState extends State<SignInBody> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
+                      print(_formKey.currentState!.validate());
                       _formKey.currentState!.save();
                       print('http request');
                       print(_phoneValue);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VerificationCodeScreen(),
+                        ),
+                      );
                     }
                   },
                   child: Text('ارسال کد اعتبارسنجی'),
