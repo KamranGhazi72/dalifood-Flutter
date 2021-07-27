@@ -13,7 +13,16 @@ class _MapResturantScreenState extends State<MapResturantScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('نقشه'),
+        backgroundColor: Color(0xFF535353),
+        centerTitle: true,
+        title: Text(
+          'نقشه',
+          style: TextStyle(
+            fontSize: 19,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: MapResturantBody(),
     );

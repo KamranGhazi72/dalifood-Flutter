@@ -10,13 +10,13 @@ class MapRes extends StatelessWidget {
     return Container(
       child: FlutterMap(
         options: MapOptions(
-          center: LatLng(35.72685718281043, 51.32285808890024),
-          zoom: 11.0,
+          center: LatLng(33.51189550112129, 48.35531868707115),
+          zoom: 16.0,
         ),
         layers: [
           TileLayerOptions(
             urlTemplate:
-                'https://api.mapbox.com/styles/v1/kamran1372/ckqdp3fof1enx18o4mcs2d7bn/wmts?access_token=pk.eyJ1Ijoia2FtcmFuMTM3MiIsImEiOiJja2w3dGkwMWwwOTRzMnJydncxMWVxYXBtIn0.RUMAja78Qzyd2PZScsK3Gw',
+                'https://api.mapbox.com/styles/v1/kamran1372/ckqdqgwww2wz717u3eeenrbpf/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia2FtcmFuMTM3MiIsImEiOiJja2w3dGkwMWwwOTRzMnJydncxMWVxYXBtIn0.RUMAja78Qzyd2PZScsK3Gw',
             additionalOptions: {
               'accessToken':
                   'pk.eyJ1Ijoia2FtcmFuMTM3MiIsImEiOiJja2w3dGkwMWwwOTRzMnJydncxMWVxYXBtIn0.RUMAja78Qzyd2PZScsK3Gw',
@@ -28,7 +28,7 @@ class MapRes extends StatelessWidget {
               Marker(
                 width: 20.0,
                 height: 20.0,
-                point: LatLng(35.72685718281043, 51.32285808890024),
+                point: LatLng(33.51189550112129, 48.35531868707115),
                 builder: (ctx) => Container(
                   child: Icon(Icons.location_on_outlined),
                 ),
