@@ -1,16 +1,24 @@
-import 'package:dali_food/screens/sign_in/components/InputFields.dart';
+import 'package:dali_food/screens/auth-screen/sign_in/components/InputFields.dart';
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
 
 class FormContainer extends StatelessWidget {
   final formKey;
   final phoneOnSaved;
-  // final passwordOnSaved;
+  final passwordOnSaved;
 
-  FormContainer({required this.formKey, this.phoneOnSaved});
+  FormContainer(
+      {required this.formKey, this.phoneOnSaved, this.passwordOnSaved});
 
   @override
   Widget build(BuildContext context) {
+    bool validateStructure(String value) {
+      String pattern =
+          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+      RegExp regExp = new RegExp(pattern);
+      return regExp.hasMatch(value);
+    }
+
     return new Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -37,16 +45,20 @@ class FormContainer extends StatelessWidget {
                   },
                   onSaved: phoneOnSaved,
                 ),
-                // new InputFieldArea(
-                //     hint: "پسورد",
-                //     obscure: true,
-                //     icon: Icons.lock_open,
-                //     validator: (String? value) {
-                //       if (value!.length < 5) {
-                //         return 'طول پسورد باید حداقل 6 کاراکتر باشد';
-                //       }
-                //     },
-                //     onSaved: passwordOnSaved),
+                new InputFieldArea(
+                    hint: "پسورد",
+                    obscure: true,
+                    icon: Icons.lock_open,
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return 'لطفا رمز خود را وارد بفرمایید';
+                        // } else if (!isNumeric(value)) {
+                        //   return 'رمز وارد شده معتبر نیست';
+                      } else if (!validateStructure(value)) {
+                        return 'رمز وارد شده باید دارای حروف بزرگ و کوچک انگلیسی \n ، یکی از (!،#،*،@ و...) و اعداد باشد';
+                      }
+                    },
+                    onSaved: passwordOnSaved),
               ],
             ),
           )

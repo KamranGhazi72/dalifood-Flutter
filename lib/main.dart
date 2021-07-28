@@ -1,5 +1,4 @@
-import 'package:dali_food/screens/home-screen/home_screen.dart';
-import 'package:dali_food/screens/sign_in/sign_in_screen.dart';
+import 'package:dali_food/screens/auth-screen/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

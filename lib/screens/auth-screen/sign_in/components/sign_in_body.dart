@@ -1,5 +1,6 @@
-import 'package:dali_food/screens/sign_in/components/Form.dart';
-import 'package:dali_food/screens/verificationCode-screen/verificationCode_screen.dart';
+import 'package:dali_food/screens/auth-screen/sign_in/components/Form.dart';
+import 'package:dali_food/screens/auth-screen/verificationCode-screen/verificationCode_screen.dart';
+import 'package:dali_food/services/services.dart';
 import 'package:flutter/material.dart';
 
 class SignInBody extends StatefulWidget {
@@ -9,10 +10,16 @@ class SignInBody extends StatefulWidget {
 
 class _SignInBodyState extends State<SignInBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   String? _phoneValue;
+  String? _passwordValue;
 
   phoneOnSaved(String? value) {
     _phoneValue = value;
+  }
+
+  passwordOnSaved(String value) {
+    _passwordValue = value;
   }
 
   @override
@@ -20,6 +27,7 @@ class _SignInBodyState extends State<SignInBody> {
     var page = MediaQuery.of(context).size;
 
     return Container(
+      key: _scaffoldKey,
       decoration: new BoxDecoration(
           gradient: new LinearGradient(
               colors: <Color>[const Color(0xff2c5364), const Color(0xff0f2027)],
@@ -63,12 +71,12 @@ class _SignInBodyState extends State<SignInBody> {
                   ),
                 ),
               ),
-              SizedBox(height: page.width / 5),
+              SizedBox(height: page.width / 8),
               FormContainer(
                 formKey: _formKey,
                 phoneOnSaved: phoneOnSaved,
               ),
-              SizedBox(height: 60),
+              SizedBox(height: 70),
               SizedBox(
                 width: page.width / 1.3,
                 child: ElevatedButton(
@@ -82,12 +90,8 @@ class _SignInBodyState extends State<SignInBody> {
                       _formKey.currentState!.save();
                       print('http request');
                       print(_phoneValue);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VerificationCodeScreen(),
-                        ),
-                      );
+                      print(_passwordValue);
+                      sendDataForLogin();
                     }
                   },
                   child: Text('ارسال کد اعتبارسنجی'),
@@ -98,5 +102,30 @@ class _SignInBodyState extends State<SignInBody> {
         ],
       ),
     );
+  }
+
+  sendDataForLogin() async {
+    // await _loginButtonController.animateTo(0.150);
+    Map response =
+        await (new Services()).sendDataToLogin({"phonenumber": _phoneValue});
+    print('status: $response');
+    if (response['status'] == 'success') {
+      //
+      // await _loginButtonController.forward();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => VerificationCodeScreen(),
+        ),
+      );
+    } else {
+      // await _loginButtonController.reverse();
+      // _scaffoldKey.currentState!.showSnackBar(new SnackBar(
+      //     content: new Text(
+      //   response['data'],
+      //   style: new TextStyle(fontFamily: 'Vazir'),
+      // )));
+      print('Naraft!!!!!!!!!!!!!!');
+    }
   }
 }
