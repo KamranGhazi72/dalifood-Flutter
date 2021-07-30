@@ -1,5 +1,6 @@
 import 'package:dali_food/models/address.dart';
 import 'package:dali_food/screens/address-screen/widgets/address_item.dart';
+import 'package:dali_food/screens/address-screen/widgets/map_res.dart';
 import 'package:flutter/material.dart';
 
 class AddressBody extends StatefulWidget {
@@ -30,7 +31,9 @@ class _AddressBodyState extends State<AddressBody> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MapRes(),),);
+                  },
                   child: Row(
                     children: [
                       Icon(

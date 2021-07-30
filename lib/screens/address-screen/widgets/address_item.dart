@@ -1,6 +1,6 @@
 import 'package:dali_food/screens/cart-screen/cart_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddressItem extends StatelessWidget {
   String adress;
@@ -11,10 +11,10 @@ class AddressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LocalStorage storage = new LocalStorage('todo_app');
 
-    _saveToStorage() {
-      storage.setItem('AddressChoised', adress);
+    _saveToStorage() async {
+      SharedPreferences storage = await SharedPreferences.getInstance();
+        await storage.setString('addressChoised', adress);
     }
 
     return InkWell(
