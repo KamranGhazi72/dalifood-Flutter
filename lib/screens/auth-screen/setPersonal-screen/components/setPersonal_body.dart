@@ -1,29 +1,39 @@
 import 'dart:convert';
-
-import 'package:dali_food/screens/auth-screen/setPhone-screen/setPhone_screen.dart';
-import 'package:dali_food/screens/auth-screen/sign_in/components/Form.dart';
-import 'package:dali_food/screens/home-screen/home_screen.dart';
+import 'package:dali_food/screens/auth-screen/setPersonal-screen/components/Form.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class SignInBody extends StatefulWidget {
+class SetPersonalBody extends StatefulWidget {
+  final String phone;
+  final String tokenHash;
+
+  SetPersonalBody({Key? key, required this.phone, required this.tokenHash}) : super(key: key);
   @override
-  _SignInBodyState createState() => _SignInBodyState();
+  _SetPersonalBodyState createState() => _SetPersonalBodyState();
 }
 
-class _SignInBodyState extends State<SignInBody> {
+class _SetPersonalBodyState extends State<SetPersonalBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  String? _phoneValue;
+  String? _nameValue;
+  String? _familyValue;
   String? _passwordValue;
+  String? _confirmPasswordValue;
 
-  phoneOnSaved(String? value) {
-    _phoneValue = value;
+  nameOnSaved(String? value) {
+    _nameValue = value;
+  }
+
+  familyOnSaved(String? value) {
+    _familyValue = value;
   }
 
   passwordOnSaved(String? value) {
     _passwordValue = value;
+  }
+
+  confirmPasswordOnSaved(String? value) {
+    _confirmPasswordValue = value;
   }
 
   @override
@@ -79,28 +89,11 @@ class _SignInBodyState extends State<SignInBody> {
                 SizedBox(height: page.width / 8),
                 FormContainer(
                   formKey: _formKey,
-                  phoneOnSaved: phoneOnSaved,
+                  nameOnSaved: nameOnSaved,
+                  familyOnSaved: familyOnSaved,
                   passwordOnSaved: passwordOnSaved,
+                  confirmPasswordOnSaved: confirmPasswordOnSaved,
                 ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SetPhoneScreen(),
-          ),
-        );
-                    },
-                    child: new Text(
-                      "فراموشی رمزعبور؟",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        letterSpacing: 0.5,
-                        color: Colors.lightBlueAccent,
-                        fontSize: 14
-                      ),
-                    ),),
-    
                 SizedBox(height: 70),
                 SizedBox(
                   width: page.width / 1.3,
@@ -114,33 +107,12 @@ class _SignInBodyState extends State<SignInBody> {
                         print(_formKey.currentState!.validate());
                         _formKey.currentState!.save();
                         print('http request');
-                        print(_phoneValue);
-                        print(_passwordValue);
-                        sendDataForLogin(_phoneValue , _passwordValue);
+                        sendDataForLogin(widget.phone , widget.tokenHash);
                       }
                     },
                     child: Text('ارسال کد اعتبارسنجی'),
                   ),
                 ),
-                SizedBox(height: 10),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SetPhoneScreen(),
-          ),
-        );
-                    },
-                    child: new Text(
-                      "آیا هیچ اکانتی ندارید؟ عضویت",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        letterSpacing: 0.5,
-                        color: Colors.white,
-                        fontSize: 13
-                      ),
-                    ),),
               ],
             ),
           ],
@@ -149,28 +121,36 @@ class _SignInBodyState extends State<SignInBody> {
     );
   }
 
-  sendDataForLogin(_phoneValue , _passwordValue) async {
+  sendDataForLogin(phone , tokenHash) async {
+    Map data = {
+      "password": _passwordValue,
+      "confrimPassword": _confirmPasswordValue,
+      "name": _nameValue,
+      "family": _familyValue,
+    };
+    var body = json.encode(data);
     // await _loginButtonController.animateTo(0.150);
     final response =
         await http.post(
       Uri.parse(
-          'https://api.dalifood.app/api/Login?Phonenumber=$_phoneValue&password=$_passwordValue'),
+          'https://api.dalifood.app/api/Register?phonenumber=$phone&token=$tokenHash'),
+      headers: {
+        "Content-Type": "application/json",
+        // "Accept": "application/json",
+      },
+      body: body,
     );
-    print('status: $response');
+    print('status: ${response.body}');
     if (response.statusCode == 200) {
       //
-      print('response.body:: ${response.body}');
-      var responseBody = json.decode(response.body);
-      
-      SharedPreferences pref = await SharedPreferences.getInstance();
-        await pref.setString('tokenHash', responseBody['token']);
+      print('response.body SetPersonal:: ${response.body}');
       // await _loginButtonController.forward();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => VerificationCodeScreen(),
+      //   ),
+      // );
     } else {
       // await _loginButtonController.reverse();
       // _scaffoldKey.currentState!.showSnackBar(new SnackBar(
@@ -178,9 +158,7 @@ class _SignInBodyState extends State<SignInBody> {
       //   response['data'],
       //   style: new TextStyle(fontFamily: 'Vazir'),
       // )));
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
-        response.body[1],
-        style: new TextStyle(fontFamily: 'Vazir'),),),);
+      print('Naraft!!!!!!!!!!!!!!');
     }
   }
 }

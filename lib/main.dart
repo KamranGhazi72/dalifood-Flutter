@@ -1,4 +1,5 @@
 import 'package:dali_food/screens/auth-screen/sign_in/sign_in_screen.dart';
+import 'package:dali_food/screens/splash-screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SignInScreen(),
+      home: SplashScreen(),
     );
   }
 }

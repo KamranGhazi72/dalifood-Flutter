@@ -1,4 +1,6 @@
+import 'package:dali_food/screens/splash-screen/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileItems extends StatelessWidget {
   @override
@@ -84,7 +86,11 @@ class ProfileItems extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              SharedPreferences preferences = await SharedPreferences.getInstance();
+              await preferences.clear();
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SplashScreen(),),);
+            },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               margin: EdgeInsets.symmetric(vertical: 10),

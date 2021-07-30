@@ -49,7 +49,7 @@ class AddressDesc extends StatelessWidget {
                         height: 20.0,
                         point: LatLng(35.72685718281043, 51.32285808890024),
                         builder: (ctx) => Container(
-                          child: Icon(Icons.fmd_good),
+                          child: Icon(Icons.my_location_outlined),
                         ),
                       ),
                     ],

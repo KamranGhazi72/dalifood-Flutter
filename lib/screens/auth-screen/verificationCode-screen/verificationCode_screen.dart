@@ -1,9 +1,16 @@
-import 'package:dali_food/screens/home-screen/home_screen.dart';
+
+import 'package:dali_food/screens/auth-screen/setPersonal-screen/setPersonal_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:pinput/pin_put/pin_put.dart';
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class VerificationCodeScreen extends StatefulWidget {
-  const VerificationCodeScreen({Key? key}) : super(key: key);
+  final String phone;
+  final String smsVerify;
+  VerificationCodeScreen({Key? key, required this.phone, required this.smsVerify}) : super(key: key);
 
   @override
   _VerificationCodeScreenState createState() => _VerificationCodeScreenState();
@@ -23,6 +30,11 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   @override
   Widget build(BuildContext context) {
     var page = MediaQuery.of(context).size;
+
+
+    print('Phone: ${widget.phone}  &&&  Sms: ${widget.smsVerify}');
+
+
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.ltr,
@@ -57,21 +69,49 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Text(
+                  'اعتبار سنجی',
+                  style: TextStyle(
+                    color: Color(0xFFe91e63),
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.normal,
+                  ),
+                ),
+                SizedBox(height: 10),
+                SizedBox(
+                  width: page.width / 1.4,
+                  child: Text(
+                    "لطفا کد پیامک شده به شماره تماس خود را اینجا وارد کنید",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 50),
+                Text('for Test: ${widget.smsVerify}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),),
+                SizedBox(height: 40),
                       Container(
                         margin: const EdgeInsets.all(20.0),
                         padding: const EdgeInsets.all(20.0),
                         child: PinPut(
-                          eachFieldHeight: 60,
-                          eachFieldWidth: 60,
-                          keyboardType: TextInputType.number,
-                          fieldsCount: 4,
+                          eachFieldHeight: 20,
+                          eachFieldWidth: 20,
+                          keyboardType: TextInputType.text,
+                          fieldsCount: 8,
                           onSubmit: (value) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomeScreen(),
-                              ),
-                            );
+                            if(value == widget.smsVerify){
+                              getTokenHash(widget.phone,widget.smsVerify);
+                            }else{
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("کد وارد شده اشتباه است")));
+                            }
                           },
                           focusNode: _pinPutFocusNode,
                           controller: _pinPutController,
@@ -94,15 +134,15 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         ),
                       ),
                       SizedBox(height: 10.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          FlatButton(
-                            onPressed: () => _pinPutController.text = '',
-                            child: const Text('Clear All'),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //   children: <Widget>[
+                      //     TextButton(
+                      //       onPressed: () => _pinPutController.text = '',
+                      //       child: const Text('Clear All'),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ],
@@ -113,23 +153,43 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
       ),
     );
   }
-
-  // void _showSnackBar(String pin, BuildContext context) {
-  //   final snackBar = SnackBar(
-  //     duration: const Duration(seconds: 3),
-  //     content: Container(
-  //       height: 80.0,
-  //       child: Center(
-  //         child: Text(
-  //           'Pin Submitted. Value: $pin',
-  //           style: const TextStyle(fontSize: 25.0),
-  //         ),
-  //       ),
-  //     ),
-  //     backgroundColor: Colors.deepPurpleAccent,
-  //   );
-  //   Scaffold.of(context)
-  //     ..hideCurrentSnackBar()
-  //     ..showSnackBar(snackBar);
-  // }
+  getTokenHash(phone , smsVerify) async {
+  final response = 
+    await http.post(
+      Uri.parse('https://api.dalifood.app/api/Register/VerifyPhoneNumber?phonenumber=$phone&token=$smsVerify'),
+  );
+  print('status: $response');
+  if (response.statusCode == 200) {
+    //
+    print('response.body In Verifi:: ${response.body}');
+    var responseBody = json.decode(response.body);
+    
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString('phone', phone);
+    await pref.setString('tokenHash', responseBody['tokenHash']);
+    // await _loginButtonController.forward();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SetPersonalScreen(phone: phone , tokenHash: responseBody['tokenHash']),
+      ),
+    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => VerificationCodeScreen(),
+    //   ),
+    // );
+  } else {
+    // await _loginButtonController.reverse();
+    // _scaffoldKey.currentState!.showSnackBar(new SnackBar(
+    //     content: new Text(
+    //   response['data'],
+    //   style: new TextStyle(fontFamily: 'Vazir'),
+    // )));
+    print('Naraft!!!!!!!!!!!!!!');
+  }
 }
+}
+
+

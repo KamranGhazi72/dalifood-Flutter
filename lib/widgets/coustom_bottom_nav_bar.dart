@@ -56,7 +56,7 @@ class CustomBottomNavBar extends StatelessWidget {
               ),
               IconButton(
                 icon: Icon(
-                  Icons.manage_search_outlined,
+                  Icons.search_outlined,
                   color: MenuState.search == selectedMenu
                       ? Color(0xFFe91e63)
                       : inActiveIconColor,
