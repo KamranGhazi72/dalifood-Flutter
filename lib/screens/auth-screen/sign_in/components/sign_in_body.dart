@@ -34,10 +34,10 @@ class _SignInBodyState extends State<SignInBody> {
       child: Container(
         key: _scaffoldKey,
         decoration: new BoxDecoration(
-            gradient: new LinearGradient(
-                colors: <Color>[const Color(0xff2c5364), const Color(0xff0f2027)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter)),
+            gradient: new LinearGradient(colors: <Color>[
+          const Color(0xff2c5364),
+          const Color(0xff0f2027)
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: new Stack(
           alignment: Alignment.center,
           children: <Widget>[
@@ -83,24 +83,23 @@ class _SignInBodyState extends State<SignInBody> {
                   passwordOnSaved: passwordOnSaved,
                 ),
                 TextButton(
-                    onPressed: () {
-                      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SetPhoneScreen(),
-          ),
-        );
-                    },
-                    child: new Text(
-                      "فراموشی رمزعبور؟",
-                      style: TextStyle(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SetPhoneScreen(),
+                      ),
+                    );
+                  },
+                  child: new Text(
+                    "فراموشی رمزعبور؟",
+                    style: TextStyle(
                         fontWeight: FontWeight.w300,
                         letterSpacing: 0.5,
                         color: Colors.lightBlueAccent,
-                        fontSize: 14
-                      ),
-                    ),),
-    
+                        fontSize: 14),
+                  ),
+                ),
                 SizedBox(height: 70),
                 SizedBox(
                   width: page.width / 1.3,
@@ -116,7 +115,7 @@ class _SignInBodyState extends State<SignInBody> {
                         print('http request');
                         print(_phoneValue);
                         print(_passwordValue);
-                        sendDataForLogin(_phoneValue , _passwordValue);
+                        sendDataForLogin(_phoneValue, _passwordValue);
                       }
                     },
                     child: Text('ارسال کد اعتبارسنجی'),
@@ -124,23 +123,23 @@ class _SignInBodyState extends State<SignInBody> {
                 ),
                 SizedBox(height: 10),
                 TextButton(
-                    onPressed: () {
-                      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SetPhoneScreen(),
-          ),
-        );
-                    },
-                    child: new Text(
-                      "آیا هیچ اکانتی ندارید؟ عضویت",
-                      style: TextStyle(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SetPhoneScreen(),
+                      ),
+                    );
+                  },
+                  child: new Text(
+                    "آیا هیچ اکانتی ندارید؟ عضویت",
+                    style: TextStyle(
                         fontWeight: FontWeight.w300,
                         letterSpacing: 0.5,
                         color: Colors.white,
-                        fontSize: 13
-                      ),
-                    ),),
+                        fontSize: 13),
+                  ),
+                ),
               ],
             ),
           ],
@@ -149,10 +148,9 @@ class _SignInBodyState extends State<SignInBody> {
     );
   }
 
-  sendDataForLogin(_phoneValue , _passwordValue) async {
+  sendDataForLogin(_phoneValue, _passwordValue) async {
     // await _loginButtonController.animateTo(0.150);
-    final response =
-        await http.post(
+    final response = await http.post(
       Uri.parse(
           'https://api.dalifood.app/api/Login?Phonenumber=$_phoneValue&password=$_passwordValue'),
     );
@@ -161,9 +159,11 @@ class _SignInBodyState extends State<SignInBody> {
       //
       print('response.body:: ${response.body}');
       var responseBody = json.decode(response.body);
-      
+
+      print('responseBody:: $responseBody');
+
       SharedPreferences pref = await SharedPreferences.getInstance();
-        await pref.setString('tokenHash', responseBody['token']);
+      await pref.setString('tokenHash', responseBody['token']);
       // await _loginButtonController.forward();
       Navigator.push(
         context,
@@ -178,9 +178,14 @@ class _SignInBodyState extends State<SignInBody> {
       //   response['data'],
       //   style: new TextStyle(fontFamily: 'Vazir'),
       // )));
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
-        response.body[1],
-        style: new TextStyle(fontFamily: 'Vazir'),),),);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            response.body[1],
+            style: new TextStyle(fontFamily: 'Vazir'),
+          ),
+        ),
+      );
     }
   }
 }

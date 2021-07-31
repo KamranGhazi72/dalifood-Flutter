@@ -11,8 +11,17 @@ class AddressBody extends StatefulWidget {
 }
 
 class _AddressBodyState extends State<AddressBody> {
+  late Future<CustomerAddress> futureCustomerAddress;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    futureCustomerAddress = getAllAddresses();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('futureCustomerAddress:::    $futureCustomerAddress');
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(18.0),
@@ -32,7 +41,12 @@ class _AddressBodyState extends State<AddressBody> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MapRes(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MapRes(),
+                      ),
+                    );
                   },
                   child: Row(
                     children: [
@@ -82,7 +96,7 @@ class _AddressBodyState extends State<AddressBody> {
                           ],
                         ),
                       ),
-                      child: AddressItem(adress: addr[index].addressText),
+                      child: AddressItem(adress: addr[index].textAddress),
                     ),
                   );
                 },
