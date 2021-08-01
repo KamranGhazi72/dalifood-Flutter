@@ -11,10 +11,9 @@ class AddressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     _saveToStorage() async {
       SharedPreferences storage = await SharedPreferences.getInstance();
-        await storage.setString('addressChoised', adress);
+      await storage.setString('addressChoised', adress);
     }
 
     return InkWell(
@@ -49,10 +48,13 @@ class AddressItem extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(12),
-              child: Icon(
-                Icons.edit_outlined,
-                color: Colors.lightBlueAccent,
+              padding: const EdgeInsets.all(5),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.edit_outlined,
+                  color: Colors.lightBlueAccent,
+                ),
               ),
             ),
           ],

@@ -16,37 +16,24 @@ class CustomerAddress {
     required this.textAddress,
   });
 
-  factory CustomerAddress.fromJson(Map<String, dynamic> json) {
+  factory CustomerAddress.fromJson(Map<String, dynamic> parsedJson) {
     return CustomerAddress(
-      id: json['id'],
-      lat: json['latitude'],
-      long: json['longitude'],
-      textAddress: json['textAddress'],
+      id: parsedJson['id'],
+      lat: parsedJson['latitude'],
+      long: parsedJson['longitude'],
+      textAddress: parsedJson['textAddress'],
     );
   }
 }
 
-List<CustomerAddress> addr = [
-  // CustomerAddress(
-  //   id: 0,
-  //   addressText:
-  //       'مهران - پیامبر - بلوار آیت الله کاشانی - روبرو پاساژ یاران - جنب فست فود آلاوین - ساختمان پاسارگاد - پلاک 55 - طبقه 5 - واحد 9',
-  // ),
-  // CustomerAddress(
-  //   id: 1,
-  //   addressText:
-  //       'مهران - پیامبر - بلوار آیت الله کاشانی - روبرو پاساژ یاران - جنب فست فود آلاوین - ساختمان پاسارگاد - پلاک 55 - طبقه 5 - واحد 9',
-  // ),
-];
-
-Future<CustomerAddress> getAllAddresses() async {
+Future<Map> getAllAddresses(int page) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   var token = pref.getString('tokenHash');
   print('token:::   Bearer $token');
 
   final response = await http.get(
       Uri.parse(
-          'https://api.dalifood.app/api/User/MyAddress?ItemPerPage=10&PageNum=1'),
+          'https://api.dalifood.app/api/User/MyAddress?ItemPerPage=7&PageNum=1'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Bearer $token',
@@ -55,7 +42,14 @@ Future<CustomerAddress> getAllAddresses() async {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     print('response.body:::     ${response.body}');
-    return CustomerAddress.fromJson(json.decode(response.body));
+    var responseBody = json.decode(response.body);
+
+    List<CustomerAddress> addr = [];
+    responseBody['\u0024values'].forEach((item) {
+      addr.add(CustomerAddress.fromJson(item));
+    });
+
+    return {'address': addr};
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
