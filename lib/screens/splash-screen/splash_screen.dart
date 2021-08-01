@@ -14,11 +14,21 @@ class SplashScreenState extends State<SplashScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   navigationToLogin() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),),);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SignInScreen(),
+      ),
+    );
   }
 
   navigationToHome() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen(),),);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomeScreen(),
+      ),
+    );
   }
 
   @override
@@ -32,37 +42,39 @@ class SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: new Color(0xff075E54),
-      body: new Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Container(
-                width: 125,
-                height : 125,
-                decoration: new BoxDecoration(
-                  image: new DecorationImage(
-                      image: new AssetImage("assets/images/logo.png")
-                  )
+        key: _scaffoldKey,
+        backgroundColor: new Color(0xff075E54),
+        body: new Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  width: 125,
+                  height: 125,
+                  decoration: new BoxDecoration(
+                      image: new DecorationImage(
+                          image: new AssetImage("assets/images/logo.png"))),
                 ),
-
-              ),
-              new Text("دالی فود" , style: TextStyle(fontSize: 20 , color : Colors.white , fontWeight: FontWeight.bold))
-            ],
-          ),
-          new Padding(
-            padding: const EdgeInsets.only(bottom: 30),
-            child: new Align(
-              alignment: Alignment.bottomCenter,
-              child: new CircularProgressIndicator(),
+                new Text("دالی فود",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold))
+              ],
             ),
-          )
-        ],
-      )
-    );
+            new Padding(
+              padding: const EdgeInsets.only(bottom: 100),
+              child: new Align(
+                alignment: Alignment.bottomCenter,
+                child: new CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
+            )
+          ],
+        ));
   }
 
   checkLogin() async {
@@ -71,15 +83,15 @@ class SplashScreenState extends State<SplashScreen> {
 
 //    if(apiToken == null) navigationToLogin();
 
-    if(await checkConnectionInternet()) {
+    if (await checkConnectionInternet()) {
       // check api Token
-      if(apiToken == null)
-          {navigationToLogin();}
-        else
-          {navigationToHome();}
+      if (apiToken == null) {
+        navigationToLogin();
+      } else {
+        navigationToHome();
+      }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        new SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
           duration: new Duration(hours: 2),
           content: new GestureDetector(
             onTap: () {
@@ -89,19 +101,23 @@ class SplashScreenState extends State<SplashScreen> {
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                new Text('از اتصال دستگاه به اینترنت مطمئن شوید', style: TextStyle(fontFamily: 'Vazir')),
-                new Icon(Icons.wifi_lock , color: Colors.white)
+                new Text(
+                  'از اتصال دستگاه به اینترنت مطمئن شوید',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                new Icon(Icons.wifi_lock, color: Colors.white)
               ],
             ),
-          )
-        )
-      );
+          )));
     }
-
   }
 
   Future<bool> checkConnectionInternet() async {
     var connectivityResult = await (new Connectivity().checkConnectivity());
-    return connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi;
+    return connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi;
   }
 }

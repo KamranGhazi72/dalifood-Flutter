@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dali_food/screens/auth-screen/setPersonal-screen/components/Form.dart';
+import 'package:dali_food/screens/auth-screen/sign_in/sign_in_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,8 @@ class SetPersonalBody extends StatefulWidget {
   final String phone;
   final String tokenHash;
 
-  SetPersonalBody({Key? key, required this.phone, required this.tokenHash}) : super(key: key);
+  SetPersonalBody({Key? key, required this.phone, required this.tokenHash})
+      : super(key: key);
   @override
   _SetPersonalBodyState createState() => _SetPersonalBodyState();
 }
@@ -44,10 +46,10 @@ class _SetPersonalBodyState extends State<SetPersonalBody> {
       child: Container(
         key: _scaffoldKey,
         decoration: new BoxDecoration(
-            gradient: new LinearGradient(
-                colors: <Color>[const Color(0xff2c5364), const Color(0xff0f2027)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter)),
+            gradient: new LinearGradient(colors: <Color>[
+          const Color(0xff2c5364),
+          const Color(0xff0f2027)
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: new Stack(
           alignment: Alignment.center,
           children: <Widget>[
@@ -107,7 +109,7 @@ class _SetPersonalBodyState extends State<SetPersonalBody> {
                         print(_formKey.currentState!.validate());
                         _formKey.currentState!.save();
                         print('http request');
-                        sendDataForLogin(widget.phone , widget.tokenHash);
+                        sendDataForLogin(widget.phone, widget.tokenHash);
                       }
                     },
                     child: Text('ارسال کد اعتبارسنجی'),
@@ -121,44 +123,60 @@ class _SetPersonalBodyState extends State<SetPersonalBody> {
     );
   }
 
-  sendDataForLogin(phone , tokenHash) async {
-    Map data = {
-      "password": _passwordValue,
-      "confrimPassword": _confirmPasswordValue,
-      "name": _nameValue,
-      "family": _familyValue,
-    };
-    var body = json.encode(data);
-    // await _loginButtonController.animateTo(0.150);
-    final response =
-        await http.post(
-      Uri.parse(
-          'https://api.dalifood.app/api/Register?phonenumber=$phone&token=$tokenHash'),
-      headers: {
-        "Content-Type": "application/json",
-        // "Accept": "application/json",
-      },
-      body: body,
-    );
-    print('status: ${response.body}');
-    if (response.statusCode == 200) {
-      //
-      print('response.body SetPersonal:: ${response.body}');
-      // await _loginButtonController.forward();
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => VerificationCodeScreen(),
-      //   ),
-      // );
-    } else {
-      // await _loginButtonController.reverse();
-      // _scaffoldKey.currentState!.showSnackBar(new SnackBar(
-      //     content: new Text(
-      //   response['data'],
-      //   style: new TextStyle(fontFamily: 'Vazir'),
-      // )));
-      print('Naraft!!!!!!!!!!!!!!');
+  sendDataForLogin(phone, tokenHash) async {
+    try {
+      Map data = {
+        "password": _passwordValue,
+        "confrimPassword": _confirmPasswordValue,
+        "name": _nameValue,
+        "family": _familyValue,
+      };
+      var body = json.encode(data);
+      // await _loginButtonController.animateTo(0.150);
+      final response = await http.post(
+        Uri.parse(
+            'https://api.dalifood.app/api/Register?phonenumber=$phone&token=$tokenHash'),
+        headers: {
+          "Content-Type": "application/json",
+          // "Accept": "application/json",
+        },
+        body: body,
+      );
+      print('status: ${response.body}');
+      if (response.statusCode == 200) {
+        //
+        print('response.body SetPersonal:: ${response.body}');
+        // await _loginButtonController.forward();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SignInScreen(),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Color(0xFFe91e63),
+            content: Text(
+              'خطایی در ارتباط با سرور رخ داده است',
+              textAlign: TextAlign.center,
+              style: new TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+        print('Naraft!!!!!!!!!!!!!!');
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Color(0xFFe91e63),
+          content: Text(
+            '$e',
+            textAlign: TextAlign.center,
+            style: new TextStyle(color: Colors.white),
+          ),
+        ),
+      );
     }
   }
 }

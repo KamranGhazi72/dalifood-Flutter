@@ -100,30 +100,47 @@ class _SetPhoneBodyState extends State<SetPhoneBody> {
 
   sendDataForLogin(_phoneValue) async {
     // await _loginButtonController.animateTo(0.150);
-    final response =
-        await http.post(
-      Uri.parse(
-          'https://api.dalifood.app/api/Register/SetPhoneNumber?phonenumber=$_phoneValue'),
-    );
-    print('status: $response');
-    if (response.statusCode == 200) {
-      //
-      print('response.body:: ${response.body}');
-      // await _loginButtonController.forward();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => VerificationCodeScreen(phone: _phoneValue , smsVerify: response.body),
+    try {
+      final response = await http.post(
+        Uri.parse(
+            'https://api.dalifood.app/api/Register/SetPhoneNumber?phonenumber=$_phoneValue'),
+      );
+      print('status: $response');
+      if (response.statusCode == 200) {
+        //
+        print('response.body:: ${response.body}');
+        // await _loginButtonController.forward();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VerificationCodeScreen(
+                phone: _phoneValue, smsVerify: response.body),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Color(0xFFe91e63),
+            content: Text(
+              'ارتباط شما با سرور قطع می باشد',
+              textAlign: TextAlign.center,
+              style: new TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+        print('Naraft!!!!!!!!!!!!!!');
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Color(0xFFe91e63),
+          content: Text(
+            '$e',
+            textAlign: TextAlign.center,
+            style: new TextStyle(color: Colors.white),
+          ),
         ),
       );
-    } else {
-      // await _loginButtonController.reverse();
-      // _scaffoldKey.currentState!.showSnackBar(new SnackBar(
-      //     content: new Text(
-      //   response['data'],
-      //   style: new TextStyle(fontFamily: 'Vazir'),
-      // )));
-      print('Naraft!!!!!!!!!!!!!!');
     }
   }
 }

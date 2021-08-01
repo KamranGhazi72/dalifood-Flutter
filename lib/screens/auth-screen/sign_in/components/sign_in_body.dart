@@ -150,39 +150,49 @@ class _SignInBodyState extends State<SignInBody> {
 
   sendDataForLogin(_phoneValue, _passwordValue) async {
     // await _loginButtonController.animateTo(0.150);
-    final response = await http.post(
-      Uri.parse(
-          'https://api.dalifood.app/api/Login?Phonenumber=$_phoneValue&password=$_passwordValue'),
-    );
-    print('status: $response');
-    if (response.statusCode == 200) {
-      //
-      print('response.body:: ${response.body}');
-      var responseBody = json.decode(response.body);
-
-      print('responseBody:: $responseBody');
-
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      await pref.setString('tokenHash', responseBody['token']);
-      // await _loginButtonController.forward();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ),
+    try {
+      final response = await http.post(
+        Uri.parse(
+            'https://api.dalifood.app/api/Login?Phonenumber=$_phoneValue&password=$_passwordValue'),
       );
-    } else {
-      // await _loginButtonController.reverse();
-      // _scaffoldKey.currentState!.showSnackBar(new SnackBar(
-      //     content: new Text(
-      //   response['data'],
-      //   style: new TextStyle(fontFamily: 'Vazir'),
-      // )));
+      print('status: $response');
+      if (response.statusCode == 200) {
+        //
+        print('response.body:: ${response.body}');
+        var responseBody = json.decode(response.body);
+
+        print('responseBody:: $responseBody');
+
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        await pref.setString('tokenHash', responseBody['token']);
+        // await _loginButtonController.forward();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ),
+        );
+      } else {
+        var responseError = json.decode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Color(0xFFe91e63),
+            content: Text(
+              '${responseError['message']}',
+              textAlign: TextAlign.center,
+              style: new TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          backgroundColor: Color(0xFFe91e63),
           content: Text(
-            response.body[1],
-            style: new TextStyle(fontFamily: 'Vazir'),
+            '$e',
+            textAlign: TextAlign.center,
+            style: new TextStyle(color: Colors.white),
           ),
         ),
       );
