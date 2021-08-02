@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dali_food/animations/singin_animation.dart';
 import 'package:dali_food/screens/auth-screen/setPhone-screen/setPhone_screen.dart';
 import 'package:dali_food/screens/auth-screen/sign_in/components/Form.dart';
 import 'package:dali_food/screens/home-screen/home_screen.dart';
@@ -12,9 +13,27 @@ class SignInBody extends StatefulWidget {
   _SignInBodyState createState() => _SignInBodyState();
 }
 
-class _SignInBodyState extends State<SignInBody> {
+class _SignInBodyState extends State<SignInBody>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _loginButtonController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loginButtonController = new AnimationController(
+        vsync: this, duration: new Duration(milliseconds: 3000));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _loginButtonController.dispose();
+    super.dispose();
+  }
+
   String? _phoneValue;
   String? _passwordValue;
 
@@ -101,14 +120,8 @@ class _SignInBodyState extends State<SignInBody> {
                   ),
                 ),
                 SizedBox(height: 70),
-                SizedBox(
-                  width: page.width / 1.3,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff075E54),
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                    ),
-                    onPressed: () async {
+                GestureDetector(
+                    onTap: () {
                       if (_formKey.currentState!.validate()) {
                         print(_formKey.currentState!.validate());
                         _formKey.currentState!.save();
@@ -118,9 +131,29 @@ class _SignInBodyState extends State<SignInBody> {
                         sendDataForLogin(_phoneValue, _passwordValue);
                       }
                     },
-                    child: Text('ارسال کد اعتبارسنجی'),
-                  ),
-                ),
+                    child: SingInAnimation(
+                      controller: _loginButtonController.view,
+                    )),
+                // SizedBox(
+                //   width: page.width / 1.3,
+                //   child: ElevatedButton(
+                //     style: ElevatedButton.styleFrom(
+                //       primary: Color(0xff075E54),
+                //       padding: EdgeInsets.symmetric(vertical: 15),
+                //     ),
+                //     onPressed: () async {
+                //       if (_formKey.currentState!.validate()) {
+                //         print(_formKey.currentState!.validate());
+                //         _formKey.currentState!.save();
+                //         print('http request');
+                //         print(_phoneValue);
+                //         print(_passwordValue);
+                //         sendDataForLogin(_phoneValue, _passwordValue);
+                //       }
+                //     },
+                //     child: Text('ارسال کد اعتبارسنجی'),
+                //   ),
+                // ),
                 SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
@@ -149,7 +182,7 @@ class _SignInBodyState extends State<SignInBody> {
   }
 
   sendDataForLogin(_phoneValue, _passwordValue) async {
-    // await _loginButtonController.animateTo(0.150);
+    await _loginButtonController.animateTo(0.150);
     try {
       final response = await http.post(
         Uri.parse(
@@ -165,7 +198,7 @@ class _SignInBodyState extends State<SignInBody> {
 
         SharedPreferences pref = await SharedPreferences.getInstance();
         await pref.setString('tokenHash', responseBody['token']);
-        // await _loginButtonController.forward();
+        await _loginButtonController.forward();
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -173,6 +206,7 @@ class _SignInBodyState extends State<SignInBody> {
           ),
         );
       } else {
+        await _loginButtonController.reverse();
         var responseError = json.decode(response.body);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -190,7 +224,7 @@ class _SignInBodyState extends State<SignInBody> {
         SnackBar(
           backgroundColor: Color(0xFFe91e63),
           content: Text(
-            '$e',
+            'Catch',
             textAlign: TextAlign.center,
             style: new TextStyle(color: Colors.white),
           ),
