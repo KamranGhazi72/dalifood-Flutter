@@ -29,11 +29,11 @@ class CustomerAddress {
 Future<Map> getAllAddresses(int page) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   var token = pref.getString('tokenHash');
-  print('token:::   Bearer $token');
-
+  // print('token:::   Bearer $token');
+  print('page:  $page');
   final response = await http.get(
       Uri.parse(
-          'https://api.dalifood.app/api/User/MyAddress?ItemPerPage=7&PageNum=1'),
+          'https://api.dalifood.app/api/User/MyAddress?ItemPerPage=7&PageNum=$page'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Bearer $token',

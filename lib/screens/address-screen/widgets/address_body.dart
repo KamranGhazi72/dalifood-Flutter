@@ -29,6 +29,7 @@ class _AddressBodyState extends State<AddressBody> {
       if (maxScroll - currentScroll <= 200) {
         if (!_loading) {
           _getAllAddresses(page: _currentPage + 1);
+          _currentPage++;
         }
       }
     });

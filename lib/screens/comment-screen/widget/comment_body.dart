@@ -1,12 +1,23 @@
 import 'package:dali_food/screens/comment-screen/widget/rateBar.dart';
 import 'package:flutter/material.dart';
 
-class CommentBody extends StatelessWidget {
+class CommentBody extends StatefulWidget {
   const CommentBody({Key? key}) : super(key: key);
 
   @override
+  _CommentBodyState createState() => _CommentBodyState();
+}
+
+class _CommentBodyState extends State<CommentBody> {
+  @override
   Widget build(BuildContext context) {
-    String _val = '';
+    String? _val;
+    double rate = 0.0;
+
+    onRatingUpdate(rating) {
+      rate = rating;
+    }
+
     return SingleChildScrollView(
       child: Center(
         child: Column(
@@ -42,7 +53,7 @@ class CommentBody extends StatelessWidget {
               ),
             ),
             SizedBox(height: 35),
-            RateBar(),
+            RateBar(onRatingUpdate: onRatingUpdate),
             SizedBox(height: 35),
             Column(
               children: [
@@ -62,18 +73,36 @@ class CommentBody extends StatelessWidget {
                       maxLines: null,
                       style: TextStyle(fontSize: 15.0, color: Colors.black),
                       decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          fillColor: Colors.white,
-                          filled: true,
-                          hintText: 'ثبت نظر'),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: 'ثبت نظر',
+                      ),
                       onChanged: (value) {
-                        _val = value;
+                        setState(() {
+                          _val = value;
+                        });
+                        print(_val);
                       },
                     ),
                   ),
-                )
+                ),
+                SizedBox(height: 10),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: 45,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFFe91e63),
+                    ),
+                    onPressed: () {
+                      print('Comment::: $rate   &&&   $_val');
+                    },
+                    child: Text('ثبت نظر'),
+                  ),
+                ),
               ],
             )
           ],
