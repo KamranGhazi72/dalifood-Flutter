@@ -9,6 +9,7 @@ class ForgetPassPhoneBody extends StatefulWidget {
 }
 
 class _ForgetPassPhoneBodyState extends State<ForgetPassPhoneBody> {
+  bool _loading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String? _phoneValue;
@@ -74,6 +75,7 @@ class _ForgetPassPhoneBodyState extends State<ForgetPassPhoneBody> {
               SizedBox(height: 70),
               SizedBox(
                 width: page.width / 1.3,
+                height: 65,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xff075E54),
@@ -81,6 +83,9 @@ class _ForgetPassPhoneBodyState extends State<ForgetPassPhoneBody> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
+                      setState(() {
+                        _loading = true;
+                      });
                       print(_formKey.currentState!.validate());
                       _formKey.currentState!.save();
                       print('http request');
@@ -100,8 +105,7 @@ class _ForgetPassPhoneBodyState extends State<ForgetPassPhoneBody> {
 
   sendDataForLogin(_phoneValue) async {
     // await _loginButtonController.animateTo(0.150);
-    final response =
-        await http.post(
+    final response = await http.post(
       Uri.parse(
           'https://api.dalifood.app/api/Register/ForgetPassword?phonenumber=$_phoneValue'),
     );
@@ -109,14 +113,18 @@ class _ForgetPassPhoneBodyState extends State<ForgetPassPhoneBody> {
     if (response.statusCode == 200) {
       //
       print('response.body:: ${response.body}');
+
+      _loading = false;
       // await _loginButtonController.forward();
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => VerificationCodeScreen(phone: _phoneValue , smsVerify: response.body),
+          builder: (context) => VerificationCodeScreen(
+              phone: _phoneValue, smsVerify: response.body),
         ),
       );
     } else {
+      _loading = false;
       // await _loginButtonController.reverse();
       // _scaffoldKey.currentState!.showSnackBar(new SnackBar(
       //     content: new Text(

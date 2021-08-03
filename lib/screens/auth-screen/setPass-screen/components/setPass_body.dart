@@ -1,4 +1,3 @@
-
 import 'package:dali_food/screens/auth-screen/setPass-screen/components/Form.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ class SetPassBody extends StatefulWidget {
 }
 
 class _SetPassBodyState extends State<SetPassBody> {
+  bool _loading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String? _phoneValue;
@@ -78,20 +78,20 @@ class _SetPassBodyState extends State<SetPassBody> {
                 passwordOnSaved: passwordOnSaved,
               ),
               TextButton(
-                  onPressed: null,
-                  child: new Text(
-                    "آیا هیچ اکانتی ندارید؟ عضویت",
-                    style: TextStyle(
+                onPressed: null,
+                child: new Text(
+                  "آیا هیچ اکانتی ندارید؟ عضویت",
+                  style: TextStyle(
                       fontWeight: FontWeight.w300,
                       letterSpacing: 0.5,
                       color: Colors.white,
-                      fontSize: 14
-                    ),
-                  ),),
-
+                      fontSize: 14),
+                ),
+              ),
               SizedBox(height: 70),
               SizedBox(
                 width: page.width / 1.3,
+                height: 65,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xff075E54),
@@ -99,6 +99,9 @@ class _SetPassBodyState extends State<SetPassBody> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
+                      setState(() {
+                        _loading = true;
+                      });
                       print(_formKey.currentState!.validate());
                       _formKey.currentState!.save();
                       print('http request');
@@ -107,7 +110,11 @@ class _SetPassBodyState extends State<SetPassBody> {
                       sendDataForLogin(_phoneValue);
                     }
                   },
-                  child: Text('ارسال کد اعتبارسنجی'),
+                  child: _loading
+                      ? CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : Text('ارسال کد اعتبارسنجی'),
                 ),
               ),
             ],
@@ -119,8 +126,7 @@ class _SetPassBodyState extends State<SetPassBody> {
 
   sendDataForLogin(_phoneValue) async {
     // await _loginButtonController.animateTo(0.150);
-    final response =
-        await http.post(
+    final response = await http.post(
       Uri.parse(
           'https://api.dalifood.app/api/Register/SetPhoneNumber?phonenumber=$_phoneValue'),
     );
@@ -128,6 +134,8 @@ class _SetPassBodyState extends State<SetPassBody> {
     if (response.statusCode == 200) {
       //
       print('response.body:: ${response.body}');
+
+      _loading = false;
       // await _loginButtonController.forward();
       // Navigator.push(
       //   context,
@@ -136,6 +144,7 @@ class _SetPassBodyState extends State<SetPassBody> {
       //   ),
       // );
     } else {
+      _loading = false;
       // await _loginButtonController.reverse();
       // _scaffoldKey.currentState!.showSnackBar(new SnackBar(
       //     content: new Text(

@@ -15,24 +15,25 @@ class SignInBody extends StatefulWidget {
 
 class _SignInBodyState extends State<SignInBody>
     with SingleTickerProviderStateMixin {
-  late AnimationController _loginButtonController;
+  bool _loading = false;
+  // late AnimationController _loginButtonController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _loginButtonController = new AnimationController(
-        vsync: this, duration: new Duration(milliseconds: 3000));
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   _loginButtonController = new AnimationController(
+  //       vsync: this, duration: new Duration(milliseconds: 1000));
+  // }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _loginButtonController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   _loginButtonController.dispose();
+  //   super.dispose();
+  // }
 
   String? _phoneValue;
   String? _passwordValue;
@@ -120,28 +121,8 @@ class _SignInBodyState extends State<SignInBody>
                   ),
                 ),
                 SizedBox(height: 70),
-                GestureDetector(
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        print(_formKey.currentState!.validate());
-                        _formKey.currentState!.save();
-                        print('http request');
-                        print(_phoneValue);
-                        print(_passwordValue);
-                        sendDataForLogin(_phoneValue, _passwordValue);
-                      }
-                    },
-                    child: SingInAnimation(
-                      controller: _loginButtonController.view,
-                    )),
-                // SizedBox(
-                //   width: page.width / 1.3,
-                //   child: ElevatedButton(
-                //     style: ElevatedButton.styleFrom(
-                //       primary: Color(0xff075E54),
-                //       padding: EdgeInsets.symmetric(vertical: 15),
-                //     ),
-                //     onPressed: () async {
+                // GestureDetector(
+                //     onTap: () {
                 //       if (_formKey.currentState!.validate()) {
                 //         print(_formKey.currentState!.validate());
                 //         _formKey.currentState!.save();
@@ -151,9 +132,37 @@ class _SignInBodyState extends State<SignInBody>
                 //         sendDataForLogin(_phoneValue, _passwordValue);
                 //       }
                 //     },
-                //     child: Text('ارسال کد اعتبارسنجی'),
-                //   ),
-                // ),
+                //     child: SingInAnimation(
+                //       controller: _loginButtonController.view,
+                //     )),
+                SizedBox(
+                  width: page.width / 1.3,
+                  height: 65,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xff075E54),
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                    ),
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          _loading = true;
+                        });
+                        print(_formKey.currentState!.validate());
+                        _formKey.currentState!.save();
+                        print('http request');
+                        print(_phoneValue);
+                        print(_passwordValue);
+                        sendDataForLogin(_phoneValue, _passwordValue);
+                      }
+                    },
+                    child: _loading
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text('ارسال کد اعتبارسنجی'),
+                  ),
+                ),
                 SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
@@ -182,7 +191,7 @@ class _SignInBodyState extends State<SignInBody>
   }
 
   sendDataForLogin(_phoneValue, _passwordValue) async {
-    await _loginButtonController.animateTo(0.150);
+    // await _loginButtonController.animateTo(0.150);
     try {
       final response = await http.post(
         Uri.parse(
@@ -198,7 +207,9 @@ class _SignInBodyState extends State<SignInBody>
 
         SharedPreferences pref = await SharedPreferences.getInstance();
         await pref.setString('tokenHash', responseBody['token']);
-        await _loginButtonController.forward();
+
+        _loading = false;
+        // await _loginButtonController.forward();
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -206,13 +217,14 @@ class _SignInBodyState extends State<SignInBody>
           ),
         );
       } else {
-        await _loginButtonController.reverse();
+        _loading = false;
+        // await _loginButtonController.reverse();
         var responseError = json.decode(response.body);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Color(0xFFe91e63),
             content: Text(
-              '${responseError['message']}',
+              '${responseError['title']}',
               textAlign: TextAlign.center,
               style: new TextStyle(color: Colors.white),
             ),
@@ -220,6 +232,7 @@ class _SignInBodyState extends State<SignInBody>
         );
       }
     } catch (e) {
+      _loading = false;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Color(0xFFe91e63),

@@ -18,6 +18,7 @@ class VerificationCodeScreen extends StatefulWidget {
 }
 
 class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
+  bool _loading = false;
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
 
@@ -65,89 +66,102 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                       ),
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'اعتبار سنجی',
-                        style: TextStyle(
-                          color: Color(0xFFe91e63),
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.normal,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      SizedBox(
-                        width: page.width / 1.4,
-                        child: Text(
-                          "لطفا کد پیامک شده به شماره تماس خود را اینجا وارد کنید",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
+                  _loading
+                      ? Center(
+                          child: CircularProgressIndicator(
                             color: Colors.white,
-                            fontWeight: FontWeight.w500,
                           ),
-                        ),
-                      ),
-                      SizedBox(height: 50),
-                      Text(
-                        'for Test: ${widget.smsVerify}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 40),
-                      Container(
-                        margin: const EdgeInsets.all(20.0),
-                        padding: const EdgeInsets.all(20.0),
-                        child: PinPut(
-                          eachFieldHeight: 20,
-                          eachFieldWidth: 20,
-                          keyboardType: TextInputType.text,
-                          fieldsCount: 8,
-                          onSubmit: (value) {
-                            if (value == widget.smsVerify) {
-                              getTokenHash(widget.phone, widget.smsVerify);
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text("کد وارد شده اشتباه است")));
-                            }
-                          },
-                          focusNode: _pinPutFocusNode,
-                          controller: _pinPutController,
-                          submittedFieldDecoration: _pinPutDecoration.copyWith(
-                            borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(.5),
-                              width: 4,
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'اعتبار سنجی',
+                              style: TextStyle(
+                                color: Color(0xFFe91e63),
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.normal,
+                              ),
                             ),
-                            color: Colors.white.withOpacity(.9),
-                          ),
-                          selectedFieldDecoration: _pinPutDecoration,
-                          followingFieldDecoration: _pinPutDecoration.copyWith(
-                            borderRadius: BorderRadius.circular(5.0),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(.5),
-                              width: 4,
+                            SizedBox(height: 10),
+                            SizedBox(
+                              width: page.width / 1.4,
+                              child: Text(
+                                "لطفا کد پیامک شده به شماره تماس خود را اینجا وارد کنید",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                             ),
-                          ),
+                            SizedBox(height: 50),
+                            Text(
+                              'for Test: ${widget.smsVerify}',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(height: 40),
+                            Container(
+                              margin: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.all(20.0),
+                              child: PinPut(
+                                eachFieldHeight: 20,
+                                eachFieldWidth: 20,
+                                keyboardType: TextInputType.text,
+                                fieldsCount: 8,
+                                onSubmit: (value) {
+                                  if (value == widget.smsVerify) {
+                                    setState(() {
+                                      _loading = true;
+                                    });
+                                    getTokenHash(
+                                        widget.phone, widget.smsVerify);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                "کد وارد شده اشتباه است")));
+                                  }
+                                },
+                                focusNode: _pinPutFocusNode,
+                                controller: _pinPutController,
+                                submittedFieldDecoration:
+                                    _pinPutDecoration.copyWith(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(.5),
+                                    width: 4,
+                                  ),
+                                  color: Colors.white.withOpacity(.9),
+                                ),
+                                selectedFieldDecoration: _pinPutDecoration,
+                                followingFieldDecoration:
+                                    _pinPutDecoration.copyWith(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(.5),
+                                    width: 4,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10.0),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            //   children: <Widget>[
+                            //     TextButton(
+                            //       onPressed: () => _pinPutController.text = '',
+                            //       child: const Text('Clear All'),
+                            //     ),
+                            //   ],
+                            // ),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 10.0),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //   children: <Widget>[
-                      //     TextButton(
-                      //       onPressed: () => _pinPutController.text = '',
-                      //       child: const Text('Clear All'),
-                      //     ),
-                      //   ],
-                      // ),
-                    ],
-                  ),
                 ],
               ),
             );
@@ -172,6 +186,8 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
         SharedPreferences pref = await SharedPreferences.getInstance();
         await pref.setString('phone', phone);
         await pref.setString('tokenHash', responseBody['tokenHash']);
+
+        _loading = false;
         // await _loginButtonController.forward();
         Navigator.pushReplacement(
           context,
@@ -181,11 +197,12 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
           ),
         );
       } else {
+        _loading = false;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Color(0xFFe91e63),
             content: Text(
-              'ارتباط شما با سرور قطع می باشد',
+              'کد وارد شده اشتباه است',
               textAlign: TextAlign.center,
               style: new TextStyle(color: Colors.white),
             ),

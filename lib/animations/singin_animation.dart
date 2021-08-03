@@ -10,9 +10,15 @@ class SingInAnimation extends StatelessWidget {
             new CurvedAnimation(
                 parent: controller, curve: new Interval(0.0, 0.150))),
         buttonZoomOut = new Tween(begin: 70.0, end: 1000.0).animate(
-            new CurvedAnimation(
-                parent: controller,
-                curve: new Interval(0.550, 0.999, curve: Curves.bounceOut)));
+          new CurvedAnimation(
+            parent: controller,
+            curve: new Interval(
+              0.550,
+              0.999,
+              curve: Curves.bounceOut,
+            ),
+          ),
+        );
 
   // Widget _animationBuilder(BuildContext context, Widget child) {
   //   return buttonZoomOut.value <= 300

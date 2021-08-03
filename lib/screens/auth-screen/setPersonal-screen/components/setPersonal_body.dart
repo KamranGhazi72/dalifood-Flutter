@@ -15,6 +15,7 @@ class SetPersonalBody extends StatefulWidget {
 }
 
 class _SetPersonalBodyState extends State<SetPersonalBody> {
+  bool _loading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String? _nameValue;
@@ -99,6 +100,7 @@ class _SetPersonalBodyState extends State<SetPersonalBody> {
                 SizedBox(height: 70),
                 SizedBox(
                   width: page.width / 1.3,
+                  height: 65,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xff075E54),
@@ -106,13 +108,20 @@ class _SetPersonalBodyState extends State<SetPersonalBody> {
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          _loading = true;
+                        });
                         print(_formKey.currentState!.validate());
                         _formKey.currentState!.save();
                         print('http request');
                         sendDataForLogin(widget.phone, widget.tokenHash);
                       }
                     },
-                    child: Text('ارسال کد اعتبارسنجی'),
+                    child: _loading
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text('ارسال کد اعتبارسنجی'),
                   ),
                 ),
               ],
@@ -146,6 +155,8 @@ class _SetPersonalBodyState extends State<SetPersonalBody> {
       if (response.statusCode == 200) {
         //
         print('response.body SetPersonal:: ${response.body}');
+
+        _loading = false;
         // await _loginButtonController.forward();
         Navigator.push(
           context,
@@ -154,6 +165,7 @@ class _SetPersonalBodyState extends State<SetPersonalBody> {
           ),
         );
       } else {
+        _loading = false;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Color(0xFFe91e63),
