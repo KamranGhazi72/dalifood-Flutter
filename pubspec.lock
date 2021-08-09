@@ -209,7 +209,7 @@ packages:
       name: get
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.4"
+    version: "4.3.6"
   http:
     dependency: "direct main"
     description:
@@ -230,7 +230,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.2"
+    version: "0.8.3+2"
   image_picker_for_web:
     dependency: transitive
     description:

@@ -1,4 +1,5 @@
 import 'package:dali_food/screens/category-screen/category_screen.dart';
+import 'package:dali_food/screens/resturant-screen/resturant_screen.dart';
 import 'package:dali_food/screens/resturantDesc-screen/resturantDesc_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -143,7 +144,7 @@ class ResturantBox extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ResturantDescScreen(),
+            builder: (context) => ResturantScreen(),
           ),
         );
       },
