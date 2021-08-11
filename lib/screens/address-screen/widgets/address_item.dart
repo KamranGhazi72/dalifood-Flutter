@@ -41,7 +41,7 @@ class AddressItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width / 1.4,
+              width: MediaQuery.of(context).size.width / 1.5,
               child: Text(
                 adress,
                 style: TextStyle(color: Colors.black87),

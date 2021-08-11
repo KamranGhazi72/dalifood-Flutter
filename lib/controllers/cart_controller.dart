@@ -8,7 +8,7 @@ class CartController extends GetxController {
   int orderCounter = 0;
 
   double get productTotalPrice => cartItem.fold(
-      0, (sum, item) => (sum + item.price + item.peykPrice) * orderCounter);
+      0, (sum, item) => (sum + item.price + item.sendingPrice) * orderCounter);
   double get drinkTotalPrice =>
       drinkItem.fold(0, (sum, item) => sum + item.price);
 

@@ -399,6 +399,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  scroll_to_index:
+    dependency: "direct main"
+    description:
+      name: scroll_to_index
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  scrollable_positioned_list:
+    dependency: "direct main"
+    description:
+      name: scrollable_positioned_list
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0-nullsafety.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -572,6 +586,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  visibility_detector:
+    dependency: "direct main"
+    description:
+      name: visibility_detector
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   win32:
     dependency: transitive
     description:

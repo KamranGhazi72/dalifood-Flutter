@@ -113,7 +113,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                 eachFieldHeight: 20,
                                 eachFieldWidth: 20,
                                 keyboardType: TextInputType.text,
-                                fieldsCount: 8,
+                                fieldsCount: 6,
                                 onSubmit: (value) {
                                   if (value == widget.smsVerify) {
                                     setState(() {

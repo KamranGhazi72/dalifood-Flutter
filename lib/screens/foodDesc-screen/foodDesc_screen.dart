@@ -13,10 +13,10 @@ class FoodDescScreen extends StatefulWidget {
   String productResturantName;
   String productFoodName;
   String productDesc;
-  double productPrice;
-  double? productOfferPrice;
-  double productPeykPrice;
-  List<String> productImg;
+  int productPrice;
+  int? productOfferPrice;
+  int productPeykPrice;
+  String productImg;
   final Product product;
 
   FoodDescScreen({
@@ -150,7 +150,7 @@ class _FoodDescScreenState extends State<FoodDescScreen> {
                             flex: 4,
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: Row(
+                              child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +167,7 @@ class _FoodDescScreenState extends State<FoodDescScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                        CrossAxisAlignment.end,
                                     children: [
                                       demoDrink[index].offerPrice != null
                                           ? Column(

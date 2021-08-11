@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class FDescName extends StatelessWidget {
   String resturantName;
   String foodName;
-  double price;
-  double? offerPrice;
-  double peykPrice;
+  int price;
+  int? offerPrice;
+  int peykPrice;
 
   FDescName({
     Key? key,

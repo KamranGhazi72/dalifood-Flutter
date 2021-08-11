@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,8 +38,6 @@ Future<Map> getAllAddresses(int page) async {
         'Authorization': 'Bearer $token',
       });
   if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
     print('response.body:::     ${response.body}');
     var responseBody = json.decode(response.body);
 
@@ -53,6 +50,6 @@ Future<Map> getAllAddresses(int page) async {
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception('Failed to load album');
+    throw Exception('Failed to load address');
   }
 }

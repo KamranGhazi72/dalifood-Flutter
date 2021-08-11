@@ -1,21 +1,49 @@
 class Product {
   int id;
-  String resturantName;
-  String foodName;
-  String foodDesc;
-  double price;
-  double? offerPrice;
-  double peykPrice;
-  List<String> img;
+  int customerTypeId;
+  String productName;
+  int productTypeId;
+  String productType;
+  String description;
+  int customerId;
+  String customerName;
+  int price;
+  int? priceWithDiscount;
+  int sendingPrice;
+  String imageAddress;
+  int rate;
 
   Product({
     required this.id,
-    required this.resturantName,
-    required this.foodName,
-    required this.foodDesc,
+    required this.customerTypeId,
+    required this.productName,
+    required this.productTypeId,
+    required this.productType,
+    required this.description,
+    required this.customerId,
+    required this.customerName,
     required this.price,
-    this.offerPrice,
-    required this.peykPrice,
-    required this.img,
+    this.priceWithDiscount,
+    required this.sendingPrice,
+    required this.imageAddress,
+    required this.rate,
   });
+
+  factory Product.fromJson(Map<String, dynamic> parsedJson) {
+    return Product(
+      id: parsedJson['id'],
+      customerTypeId: parsedJson['customerTypeId'],
+      productName: parsedJson['productName'],
+      productTypeId: parsedJson['productTypeId'],
+      productType: parsedJson['productType'],
+      description: parsedJson['description'],
+      customerId: parsedJson['customerId'],
+      customerName: parsedJson['customerName'],
+      price: parsedJson['price'],
+      priceWithDiscount: parsedJson['priceWithDiscount'],
+      sendingPrice: parsedJson['sendingPrice'],
+      imageAddress: parsedJson['imageAddress'],
+      rate: parsedJson['rate'],
+    );
+  }
 }

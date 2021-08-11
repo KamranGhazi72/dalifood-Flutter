@@ -32,7 +32,7 @@ class CartCard extends StatelessWidget {
                   color: Color(0xFFF5F6F9),
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                    image: AssetImage(cart.img[0]),
+                    image: NetworkImage("https://dalifood.app//Images//Products//5.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -45,7 +45,7 @@ class CartCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                cart.foodName,
+                cart.productName,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,

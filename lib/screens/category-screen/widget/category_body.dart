@@ -42,19 +42,19 @@ class CategoryBody extends StatelessWidget {
                               product: productsController.products[index],
                               productId: productController.products[index].id,
                               productResturantName: productsController
-                                  .products[index].resturantName,
+                                  .products[index].customerName,
                               productFoodName:
-                                  productsController.products[index].foodName,
+                                  productsController.products[index].productName,
                               productDesc:
-                                  productsController.products[index].foodDesc,
+                                  productsController.products[index].description,
                               productPrice:
                                   productsController.products[index].price,
                               productOfferPrice:
-                                  productsController.products[index].offerPrice,
+                                  productsController.products[index].priceWithDiscount,
                               productPeykPrice:
-                                  productsController.products[index].peykPrice,
+                                  productsController.products[index].sendingPrice,
                               productImg:
-                                  productsController.products[index].img,
+                                  "https://dalifood.app//Images//Products//5.jpg",
                             ),
                           ),
                         );
@@ -75,7 +75,7 @@ class CategoryBody extends StatelessWidget {
                                 children: [
                                   Text(
                                     productController
-                                        .products[index].resturantName,
+                                        .products[index].customerName,
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class CategoryBody extends StatelessWidget {
                                     children: [
                                       Text(
                                         productController
-                                            .products[index].foodName,
+                                            .products[index].productName,
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
@@ -98,8 +98,7 @@ class CategoryBody extends StatelessWidget {
                                         ),
                                       ),
                                       productController
-                                                  .products[index].offerPrice !=
-                                              null
+                                          .products[index].sendingPrice != null
                                           ? Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -144,7 +143,7 @@ class CategoryBody extends StatelessWidget {
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      '${productController.products[index].offerPrice}',
+                                                      '${productController.products[index].priceWithDiscount}',
                                                       style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
@@ -197,7 +196,7 @@ class CategoryBody extends StatelessWidget {
                                         MediaQuery.of(context).size.width * 0.9,
                                     child: Text(
                                       productController
-                                          .products[index].foodDesc,
+                                          .products[index].description,
                                       maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
@@ -217,8 +216,7 @@ class CategoryBody extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                      productController.products[index].img[0]),
+                                  image: NetworkImage("https://dalifood.app//Images//Products//5.jpg"),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -248,7 +246,7 @@ class CategoryBody extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${productController.products[index].peykPrice.toInt()}',
+                                  '${productController.products[index].sendingPrice.toInt()}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
