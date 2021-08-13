@@ -7,7 +7,7 @@ class SearchContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height * 0.75,
       width: MediaQuery.of(context).size.width,
       child: GridView.count(
         crossAxisCount: 3,
@@ -36,18 +36,21 @@ class SearchContent extends StatelessWidget {
                   children: [
                     Text(
                       foodsList[index].resturantName,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    SizedBox(height: 10),
                     Text(
                       foodsList[index].foodName,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],

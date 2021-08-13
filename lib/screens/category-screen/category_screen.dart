@@ -2,7 +2,7 @@ import 'package:dali_food/screens/category-screen/widget/category_body.dart';
 import 'package:flutter/material.dart';
 
 class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({Key? key}) : super(key: key);
+  CategoryScreen({Key? key}) : super(key: key);
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();

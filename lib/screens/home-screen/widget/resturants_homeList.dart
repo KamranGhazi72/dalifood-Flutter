@@ -40,12 +40,12 @@ class ResturantsHomeList extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CategoryScreen(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => CategoryScreen(),
+                      //   ),
+                      // );
                     },
                     child: Text(
                       'بازم هست',

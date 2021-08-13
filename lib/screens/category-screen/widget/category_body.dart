@@ -21,8 +21,6 @@ class CategoryBody extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             itemCount: productController.products.length,
             itemBuilder: (context, index) {
-              print('CatImg:::::  ${productsController.products[index].imageAddress}');
-              String img = "https://dalifood.app/Images/Products/5.jpg";
               return Container(
                 height: MediaQuery.of(context).size.width * 0.55,
                 padding: EdgeInsets.all(5),
@@ -221,7 +219,7 @@ class CategoryBody extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4),
                                   image: DecorationImage(
-                                    image: NetworkImage(img),
+                                    image: NetworkImage(productsController.products[index].imageAddress),
                                     fit: BoxFit.cover,
                                   ),
                                 ),

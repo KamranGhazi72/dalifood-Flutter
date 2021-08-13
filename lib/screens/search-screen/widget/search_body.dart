@@ -10,7 +10,7 @@ class SearchBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          CatMenu(),
+          CatMenuWidget(),
           SizedBox(height: 15),
           SearchContent(),
         ],

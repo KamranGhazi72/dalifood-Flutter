@@ -17,17 +17,18 @@ class ProductsController extends GetxController {
 
   void onInit() {
     super.onInit();
-    fetchProducts();
+    // fetchRateProducts();
   }
 
-  Future<Map> fetchProducts() async {
+
+  Future<Map> fetchProducts({required int customerId}) async {
     isLoading(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     var token = pref.getString('tokenHash');
 
     final response = await http.get(
         Uri.parse(
-            'https://api.dalifood.app/Api/CustomerProduct?ItemPerPage=5&PageNum=1&CustomerId=1'),
+            'https://api.dalifood.app/Api/CustomerProduct?ItemPerPage=5&PageNum=1&CustomerId=$customerId'),
         headers: {
           "Content-Type": "application/json",
           'Authorization': 'Bearer $token',
@@ -126,4 +127,48 @@ class ProductsController extends GetxController {
   // //   print(counterBuy);
   // //   update();
   // // }
+}
+
+class ProductsFirstlyController extends GetxController {
+  var isLoading = true.obs;
+
+  var products = <Product>[].obs;
+  // var counter = 0.obs;
+
+  // increament() {
+  //   counter++;
+  // }
+
+  void onInit() {
+    super.onInit();
+    fetchRateProducts();
+  }
+
+  Future<Map> fetchRateProducts() async {
+    isLoading(true);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var token = pref.getString('tokenHash');
+
+    final response = await http.get(
+        Uri.parse(
+            'https://api.dalifood.app/Api/CustomerProduct?ItemPerPage=5&PageNum=1'),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
+        });
+
+    if (response.statusCode == 200) {
+      print('response.body:::     ${response.body}');
+      var responseBody = json.decode(response.body);
+
+      responseBody['\u0024values'].forEach((item) {
+        products.add(Product.fromJson(item));
+      });
+      isLoading(false);
+      return {'productsItem': products};
+    } else {
+      isLoading(false);
+      throw Exception('Failed to load address');
+    }
+  }
 }
