@@ -1,3 +1,4 @@
+import 'package:dali_food/screens/resturantDesc-screen/resturantDesc_screen.dart';
 import 'package:flutter/material.dart';
 
 class ResturantTitle extends StatelessWidget {
@@ -123,28 +124,33 @@ class ResturantTitle extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  height: 85,
-                  padding: EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color(0xFFEEEEEE),
-                      width: 1,
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(Icons.brunch_dining_outlined),
-                      Text('جزییات و نظرات',
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ResturantDescScreen(),),);
+                  },
+                  child: Container(
+                    height: 85,
+                    padding: EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color(0xFFEEEEEE),
+                        width: 1,
                       ),
-                    ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.brunch_dining_outlined),
+                        Text('جزییات و نظرات',
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

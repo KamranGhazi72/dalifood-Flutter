@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ProductsController extends GetxController {
+  var isLoading = true.obs;
+
   var products = <Product>[].obs;
   // var counter = 0.obs;
 
@@ -19,16 +21,17 @@ class ProductsController extends GetxController {
   }
 
   Future<Map> fetchProducts() async {
+    isLoading(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     var token = pref.getString('tokenHash');
 
     final response = await http.get(
-      Uri.parse('https://api.dalifood.app/Api/CustomerProduct?ItemPerPage=5&PageNum=1&CustomerId=1'),
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': 'Bearer $token',
-      }
-    );
+        Uri.parse(
+            'https://api.dalifood.app/Api/CustomerProduct?ItemPerPage=5&PageNum=1&CustomerId=1'),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
+        });
 
     if (response.statusCode == 200) {
       print('response.body:::     ${response.body}');
@@ -37,13 +40,17 @@ class ProductsController extends GetxController {
       responseBody['\u0024values'].forEach((item) {
         products.add(Product.fromJson(item));
       });
+      isLoading(false);
       return {'productsItem': products};
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
+      isLoading(false);
       throw Exception('Failed to load address');
     }
   }
+
+  
+
+  
   //   await Future.delayed(Duration(seconds: 1));
   //   var productsResult = [
   //     Product(
@@ -109,10 +116,9 @@ class ProductsController extends GetxController {
   //       img: ['assets/images/kabab1.jpg'],
   //     ),
   //   ];
-
   //   products.value = productsResult;
   // }
-
+  
   // // var counterBuy = 0;
   // // increaseBuy() {
   // //   counterBuy++;

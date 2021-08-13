@@ -32,7 +32,7 @@ class CartCard extends StatelessWidget {
                   color: Color(0xFFF5F6F9),
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                    image: NetworkImage("https://dalifood.app//Images//Products//5.jpg"),
+                    image: NetworkImage(cart.imageAddress),
                     fit: BoxFit.cover,
                   ),
                 ),
