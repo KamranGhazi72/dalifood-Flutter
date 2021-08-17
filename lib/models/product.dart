@@ -10,7 +10,7 @@ class Product {
   int price;
   int? priceWithDiscount;
   int sendingPrice;
-  String imageAddress;
+  String? imageAddress;
   int rate;
 
   Product({

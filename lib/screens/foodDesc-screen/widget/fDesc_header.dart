@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:dali_food/controllers/product_controller.dart';
 
 class FDescHeader extends StatelessWidget {
-  String img;
+  String? img;
   FDescHeader({
     Key? key,
-    required this.img,
+    this.img,
   }) : super(key: key);
   // final productsController = Get.put(ProductsController());
   @override
@@ -16,11 +16,12 @@ class FDescHeader extends StatelessWidget {
       height: MediaQuery.of(context).size.width / 1.7,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(img),
-            fit: BoxFit.cover
-          ),
-        ),
+        image: DecorationImage(
+            image: NetworkImage(img == null
+                ? 'https://cuculi.com/assets/images/meal-default-img.jpg'
+                : img!),
+            fit: BoxFit.cover),
+      ),
       // child: CarouselSlider(
       //   options: CarouselOptions(
       //     height: 260.0,

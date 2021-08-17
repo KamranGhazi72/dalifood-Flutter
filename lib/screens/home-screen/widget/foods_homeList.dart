@@ -119,7 +119,11 @@ class FoodsHomeList extends StatelessWidget {
                                 image: DecorationImage(
                                   image: NetworkImage(
                                     productControler
-                                        .products[index].imageAddress,
+                                        .products[index].imageAddress == null?
+                                    'https://cuculi.com/assets/images/meal-default-img.jpg'
+                                    :
+                                    productControler
+                                        .products[index].imageAddress!,
                                   ),
                                   fit: BoxFit.cover,
                                 ),

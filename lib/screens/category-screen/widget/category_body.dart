@@ -46,18 +46,18 @@ class CategoryBody extends StatelessWidget {
                                 productId: productController.products[index].id,
                                 productResturantName: productsController
                                     .products[index].customerName,
-                                productFoodName:
-                                    productsController.products[index].productName,
-                                productDesc:
-                                    productsController.products[index].description,
+                                productFoodName: productsController
+                                    .products[index].productName,
+                                productDesc: productsController
+                                    .products[index].description,
                                 productPrice:
                                     productsController.products[index].price,
-                                productOfferPrice:
-                                    productsController.products[index].priceWithDiscount,
-                                productPeykPrice:
-                                    productsController.products[index].sendingPrice,
-                                productImg:
-                                    productsController.products[index].imageAddress,
+                                productOfferPrice: productsController
+                                    .products[index].priceWithDiscount,
+                                productPeykPrice: productsController
+                                    .products[index].sendingPrice,
+                                productImg: productsController
+                                    .products[index].imageAddress,
                               ),
                             ),
                           );
@@ -100,8 +100,9 @@ class CategoryBody extends StatelessWidget {
                                             color: Colors.black54,
                                           ),
                                         ),
-                                        productController
-                                            .products[index].sendingPrice != null
+                                        productController.products[index]
+                                                    .sendingPrice !=
+                                                null
                                             ? Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -114,7 +115,8 @@ class CategoryBody extends StatelessWidget {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Text(
                                                         '${productController.products[index].price.toInt()}',
@@ -125,7 +127,8 @@ class CategoryBody extends StatelessWidget {
                                                           decoration:
                                                               TextDecoration
                                                                   .lineThrough,
-                                                          color: Colors.red[900],
+                                                          color:
+                                                              Colors.red[900],
                                                         ),
                                                       ),
                                                       SizedBox(width: 5),
@@ -143,7 +146,8 @@ class CategoryBody extends StatelessWidget {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Text(
                                                         '${productController.products[index].priceWithDiscount}',
@@ -178,7 +182,8 @@ class CategoryBody extends StatelessWidget {
                                                     '${productController.products[index].price.toInt()}',
                                                     style: TextStyle(
                                                       fontSize: 15,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       color: Colors.green[900],
                                                     ),
                                                   ),
@@ -195,8 +200,8 @@ class CategoryBody extends StatelessWidget {
                                       ],
                                     ),
                                     SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width * 0.9,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
                                       child: Text(
                                         productController
                                             .products[index].description,
@@ -219,7 +224,12 @@ class CategoryBody extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4),
                                   image: DecorationImage(
-                                    image: NetworkImage(productsController.products[index].imageAddress),
+                                    image: NetworkImage(productsController
+                                                .products[index].imageAddress ==
+                                            null
+                                        ? 'https://cuculi.com/assets/images/meal-default-img.jpg'
+                                        : productsController
+                                            .products[index].imageAddress!),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -245,7 +255,8 @@ class CategoryBody extends StatelessWidget {
                               ),
                               SizedBox(width: 5),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(

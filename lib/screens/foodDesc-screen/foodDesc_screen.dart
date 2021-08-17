@@ -16,7 +16,7 @@ class FoodDescScreen extends StatefulWidget {
   int productPrice;
   int? productOfferPrice;
   int productPeykPrice;
-  String productImg;
+  String? productImg;
   final Product product;
 
   FoodDescScreen({
@@ -28,7 +28,7 @@ class FoodDescScreen extends StatefulWidget {
     required this.productPrice,
     this.productOfferPrice,
     required this.productPeykPrice,
-    required this.productImg,
+    this.productImg,
     required this.product,
   }) : super(key: key);
 
