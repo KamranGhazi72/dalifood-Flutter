@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class HeaderDesc extends StatelessWidget {
-  const HeaderDesc({Key? key}) : super(key: key);
+  String name;
+  String type;
+  String? description;
+
+  HeaderDesc({
+    Key? key,
+    required this.name,
+    required this.type,
+    this.description,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +22,7 @@ class HeaderDesc extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'فست فود جگوار',
+            type + ' ' + name,
             style: TextStyle(
               color: Colors.black,
               fontSize: 17,
@@ -23,7 +32,7 @@ class HeaderDesc extends StatelessWidget {
           SizedBox(height: 10),
           Text(
             'غذا های رستوران ما: ' +
-                'جوجه کباب بدون استخوان، فیله ماهی، میگو کبابی، کباب ترش، کباب چنجه ،کوبیده، قرمه سبزی، کباب برگ',
+                description!,
             style: TextStyle(
               color: Colors.black,
               fontSize: 13,

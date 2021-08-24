@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ResturantHeader extends StatelessWidget {
-  const ResturantHeader({ Key? key }) : super(key: key);
+  String? imageAddress;
+  ResturantHeader({Key? key, this.imageAddress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,9 +10,11 @@ class ResturantHeader extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 120,
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage("assets/images/food1.jpg"),
-        fit: BoxFit.cover
-        ),
+        image: DecorationImage(
+            image: NetworkImage(imageAddress == null
+                ? 'https://cuculi.com/assets/images/meal-default-img.jpg'
+                : imageAddress!),
+            fit: BoxFit.cover),
       ),
       child: Stack(
         alignment: Alignment.centerRight,
@@ -19,8 +22,7 @@ class ResturantHeader extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(right: 13),
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30)),
+                color: Colors.white, borderRadius: BorderRadius.circular(30)),
             child: IconButton(
               onPressed: () {
                 Navigator.pop(context);

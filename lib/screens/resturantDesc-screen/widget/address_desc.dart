@@ -3,10 +3,25 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class AddressDesc extends StatelessWidget {
-  const AddressDesc({Key? key}) : super(key: key);
+  String latitude;
+  String longitude;
+  String? city;
+  String address;
+
+  AddressDesc({
+    Key? key,
+    required this.latitude,
+    required this.longitude,
+    this.city,
+    required this.address,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    double lat = double.parse(latitude);
+    double long = double.parse(longitude);
+
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -16,8 +31,10 @@ class AddressDesc extends StatelessWidget {
             flex: 6,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('آدرس: ' +
-                  'خیابان کاشانی - بعد از فلکه دوم صادقیه - ساختمان پاسارگاد'),
+              child: Text(
+                'آدرس: ' +
+                    address,
+              ),
             ),
           ),
           Expanded(
@@ -29,7 +46,7 @@ class AddressDesc extends StatelessWidget {
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
               child: FlutterMap(
                 options: MapOptions(
-                  center: LatLng(35.72685718281043, 51.32285808890024),
+                  center: LatLng(lat, long),
                   zoom: 11.0,
                 ),
                 layers: [

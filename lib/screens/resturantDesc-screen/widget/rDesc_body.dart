@@ -4,7 +4,24 @@ import 'package:dali_food/screens/resturantDesc-screen/widget/header_desc.dart';
 import 'package:flutter/material.dart';
 
 class RDescBody extends StatelessWidget {
-  const RDescBody({Key? key}) : super(key: key);
+  String name;
+  String type;
+  String latitude;
+  String longitude;
+  String? city;
+  String address;
+  String? description;
+
+  RDescBody({
+    Key? key,
+    required this.name,
+    required this.type,
+    required this.latitude,
+    required this.longitude,
+    this.city,
+    required this.address,
+    this.description,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +41,17 @@ class RDescBody extends StatelessWidget {
             ),
             child: Column(
               children: [
-                HeaderDesc(),
+                HeaderDesc(
+                  name: name,
+                  type: type,
+                  description: description,
+                ),
                 SizedBox(height: 20),
-                AddressDesc(),
+                AddressDesc(
+                  latitude: latitude,
+                  longitude: longitude,
+                  address: address,
+                ),
                 SizedBox(height: 5),
               ],
             ),

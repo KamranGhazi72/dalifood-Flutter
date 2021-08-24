@@ -72,6 +72,7 @@ class _CatMenuWidgetState extends State<CatMenuWidget> {
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
+              scrollDirection: Axis.horizontal,
               itemCount: catMenu.length,
               itemBuilder: (context, index) {
                 return InkWell(

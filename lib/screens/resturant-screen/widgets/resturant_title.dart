@@ -2,7 +2,32 @@ import 'package:dali_food/screens/resturantDesc-screen/resturantDesc_screen.dart
 import 'package:flutter/material.dart';
 
 class ResturantTitle extends StatelessWidget {
-  const ResturantTitle({ Key? key }) : super(key: key);
+  String name;
+  String type;
+  String latitude;
+  String longitude;
+  String? city;
+  String address;
+  int sendingPrice;
+  String? description;
+  bool isInMyFavorite;
+  int rate;
+  int distance;
+
+  ResturantTitle({
+    Key? key,
+    required this.name,
+    required this.type,
+    required this.latitude,
+    required this.longitude,
+    this.city,
+    required this.address,
+    required this.sendingPrice,
+    this.description,
+    required this.isInMyFavorite,
+    required this.rate,
+    required this.distance,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +36,9 @@ class ResturantTitle extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.symmetric(horizontal: 10 , vertical: 20),
-            child: Text('رستوران علی بابا',
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            child: Text(
+              type + ' ' + name,
               style: TextStyle(
                 color: Colors.black87,
                 fontSize: 17,
@@ -21,7 +47,9 @@ class ResturantTitle extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30,),
+            padding: EdgeInsets.symmetric(
+              horizontal: 30,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,7 +74,8 @@ class ResturantTitle extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text('3.9',
+                                Text(
+                                  '$rate.9',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 11,
@@ -54,7 +83,8 @@ class ResturantTitle extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(width: 5),
-                                Icon(Icons.star,
+                                Icon(
+                                  Icons.star,
                                   size: 18,
                                   color: Colors.white,
                                 ),
@@ -72,7 +102,8 @@ class ResturantTitle extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text('164',
+                                Text(
+                                  '164',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 11,
@@ -80,7 +111,8 @@ class ResturantTitle extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(width: 5),
-                                Icon(Icons.message,
+                                Icon(
+                                  Icons.message,
                                   size: 18,
                                   color: Colors.white,
                                 ),
@@ -103,7 +135,7 @@ class ResturantTitle extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                '1500',
+                                '$sendingPrice',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -126,11 +158,24 @@ class ResturantTitle extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ResturantDescScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResturantDescScreen(
+                          name: name,
+                          type: type,
+                          latitude: latitude,
+                          longitude: longitude,
+                          city: city,
+                          address: address,
+                          description: description,
+                        ),
+                      ),
+                    );
                   },
                   child: Container(
                     height: 85,
-                    padding: EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Color(0xFFEEEEEE),
@@ -142,7 +187,8 @@ class ResturantTitle extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Icon(Icons.brunch_dining_outlined),
-                        Text('جزییات و نظرات',
+                        Text(
+                          'جزییات و نظرات',
                           style: TextStyle(
                             color: Colors.black87,
                             fontSize: 14,

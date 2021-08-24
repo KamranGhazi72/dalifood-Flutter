@@ -9,7 +9,7 @@ class ProfileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomerAvatar(),
+        // CustomerAvatar(),
         ProfileItems(),
       ],
     );

@@ -165,7 +165,7 @@ class FoodsHomeList extends StatelessWidget {
                                       ),
                                       productControler.products[index]
                                                   .priceWithDiscount !=
-                                              null
+                                              0
                                           ? Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceAround,
